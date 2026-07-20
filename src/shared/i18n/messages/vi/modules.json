@@ -23,6 +23,10 @@
       "description": "Tuyến đường, mục điều hướng và bố cục đã sẵn sàng. Tính năng theo dõi thói quen sẽ được xây dựng ở giai đoạn sau."
     }
   },
+  "meals": {
+    "title": "Bữa ăn",
+    "description": "Ghi lại bữa ăn, theo dõi calo, dinh dưỡng và lượng nước uống."
+  },
   "finance": {
     "title": "Tài chính",
     "description": "Theo dõi chi tiêu, thu nhập và ngân sách.",

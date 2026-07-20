@@ -62,6 +62,11 @@ src/
       infrastructure/                # LocalFinanceRepository (active), SupabaseFinanceRepository
       application/                  # finance-store.ts (Zustand)
       presentation/                 # tabs/ (overview, transactions, budgets, reports), components/
+    meals/                          # full 4-layer module, same pattern as tasks/ and finance/
+      domain/                       # types.ts, rules.ts, repository.ts (port)
+      infrastructure/                # LocalMealsRepository (active), SupabaseMealsRepository
+      application/                  # meals-store.ts (Zustand)
+      presentation/                 # tabs/ (today, weekly), components/
     _template/                      # copy this to start a new module
       domain/
       application/
@@ -137,6 +142,18 @@ Tasks module's "adjust state during render, not in an effect" pattern for
 resetting a form when *what's being edited* changes — see
 `task-detail-sheet.tsx` for the original write-up of why.
 
+`modules/meals` repeats the same shape a third time (`MealsRepository`
+port, `LocalMealsRepository` active, `SupabaseMealsRepository` waiting on
+auth, Zustand as the application layer, `MealDialog` using the same
+render-time form-reset pattern) — see its own README. It has two tabs
+instead of Finance's four: "Today" folds CRUD *and* the daily summary into
+one view via a day navigator (mirrors Finance's month-nav), "Weekly" is
+pure statistics over a fixed trailing 7 days ending today (no date-range
+picker). Its `domain/rules.ts` also reimplements day-key math locally
+rather than importing `shared/lib/date-grid.ts`, the same call Finance
+made for month-key math — each module's date arithmetic is small enough
+that a shared abstraction would cost more than it saves.
+
 ## Charts (recharts)
 
 Two non-obvious things learned building the Finance module's charts,
@@ -173,7 +190,8 @@ worth knowing before adding more:
   `Link`/`useRouter`/`usePathname`/`redirect` wrapped to stay locale-aware —
   modules should import navigation from there, not `next/navigation`.
 - Messages are split into small per-namespace JSON files
-  (`common`, `nav`, `theme`, `settings`, `modules`) under
+  (`common`, `nav`, `theme`, `settings`, `modules`, plus one per feature
+  module: `tasks`, `finance`, `meals`, ...) under
   `src/shared/i18n/messages/{en,vi}/` instead of one large file, so a new
   module adds one file rather than growing a monolith. `request.ts` merges
   them per request.
@@ -210,7 +228,8 @@ worth knowing before adding more:
 
 ## What this foundation deliberately does not include
 
-No auth flow, no tests, and — outside of `modules/tasks` — no module has
-real CRUD yet (`habits`/`finance`/`journal`/`goals` are still route
-placeholders). Tasks runs on local-only persistence rather than Supabase
-for the reason explained above. See `docs/ROADMAP.md` for what's next.
+No auth flow, no tests, and — outside of `modules/tasks`, `modules/finance`,
+and `modules/meals` — no module has real CRUD yet (`habits`/`journal`/`goals`
+are still route placeholders). All three real modules run on local-only
+persistence rather than Supabase for the reason explained above. See
+`docs/ROADMAP.md` for what's next.

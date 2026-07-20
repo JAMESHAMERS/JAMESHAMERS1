@@ -1,0 +1,46 @@
+{
+  "tabs": {
+    "today": "Today",
+    "weekly": "Weekly"
+  },
+  "type": {
+    "label": "Meal",
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "dinner": "Dinner",
+    "snack": "Snack"
+  },
+  "actions": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "addEntry": "Add entry",
+  "editEntry": "Edit entry",
+  "noEntries": "No entries yet",
+  "noData": "Nothing to show for this period",
+  "name": "Name",
+  "namePlaceholder": "What did you eat?",
+  "calories": "Calories",
+  "caloriesShort": "{count} kcal",
+  "caloriesRemaining": "{count} kcal remaining",
+  "caloriesOver": "{count} kcal over",
+  "time": "Time",
+  "nutrition": "Nutrition",
+  "protein": "Protein",
+  "carbs": "Carbs",
+  "fat": "Fat",
+  "macroSummary": "P {protein}g · C {carbs}g · F {fat}g",
+  "water": "Water",
+  "today": "Today",
+  "avgCalories": "Avg. calories",
+  "avgProtein": "Avg. protein",
+  "avgCarbs": "Avg. carbs",
+  "avgFat": "Avg. fat",
+  "avgWater": "Avg. water",
+  "caloriesTrend": "Calories vs. goal",
+  "macroSplit": "Macro split",
+  "waterTrend": "Water intake vs. goal"
+}

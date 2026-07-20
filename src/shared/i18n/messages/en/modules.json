@@ -23,6 +23,10 @@
       "description": "The route, navigation entry, and layout are ready. Habit tracking will be built on top of this in a later phase."
     }
   },
+  "meals": {
+    "title": "Meals",
+    "description": "Log meals, track calories, nutrition, and water intake."
+  },
   "finance": {
     "title": "Finance",
     "description": "Track spending, income, and budgets.",

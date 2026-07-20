@@ -17,6 +17,7 @@ const namespaces = [
   "dashboard",
   "tasks",
   "finance",
+  "meals",
 ] as const;
 
 async function loadMessages(locale: string) {

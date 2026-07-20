@@ -93,6 +93,30 @@ ahead of auth in Phase 2 — it was requested next. Same pattern as
 
 - Rich-text or markdown entry editor, mood tracking, entry search.
 
+## Phase 7 — Meals ✅
+
+Built out of order (before Habits/Goals/Journal) for the same reason
+Tasks and Finance jumped the queue — it was requested next. Same pattern
+as `modules/finance`: full 4 layers, `LocalMealsRepository` active today,
+`SupabaseMealsRepository` written and waiting on Phase 1 auth.
+
+- [x] `domain` — `MealEntry` (breakfast/lunch/dinner/snack, calories +
+  protein/carbs/fat), `WaterEntry` (ml), `NutritionGoals` (daily targets);
+  pure rules (day/weekly summaries and averages, macro-to-calorie
+  conversion, goal progress).
+- [x] `infrastructure` — `LocalMealsRepository` seeded with ~1 week of
+  realistic meals and water intake; `SupabaseMealsRepository` (not wired
+  in).
+- [x] `application` — Zustand store (`meals-store.ts`).
+- [x] `presentation` — two tabs: Today (day navigator, calorie ring,
+  macro/water progress, add/edit/delete meal entries per meal-type
+  section, quick-add water), Weekly (trailing 7-day averages, calories vs.
+  goal bar chart, macro-split donut, water vs. goal bar chart).
+- [x] New schema (`0010_meals.sql`): `meal_entries`, `water_entries`,
+  `nutrition_goals` tables, all with RLS.
+- [x] First use of `ReferenceLine` (recharts) in this codebase — the
+  dashed goal line on the Weekly tab's calorie and water bar charts.
+
 ## Ongoing / cross-cutting (pick up as needed, not a phase)
 
 - Automated tests: unit tests for each module's `domain` layer as it's

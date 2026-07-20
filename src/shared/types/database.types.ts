@@ -304,6 +304,62 @@ export interface Database {
         Partial<{ currency: string }> & { user_id: string; category_id: string; monthly_limit: number },
         Partial<{ category_id: string; monthly_limit: number; currency: string }>
       >;
+      meal_entries: TableDef<
+        {
+          id: string;
+          user_id: string;
+          meal_type: "breakfast" | "lunch" | "dinner" | "snack";
+          name: string;
+          calories: number;
+          protein_g: number;
+          carbs_g: number;
+          fat_g: number;
+          logged_at: Timestamptz;
+          created_at: Timestamptz;
+          updated_at: Timestamptz;
+        },
+        Partial<{ protein_g: number; carbs_g: number; fat_g: number; logged_at: Timestamptz }> & {
+          user_id: string;
+          meal_type: "breakfast" | "lunch" | "dinner" | "snack";
+          name: string;
+          calories: number;
+        },
+        Partial<{
+          meal_type: "breakfast" | "lunch" | "dinner" | "snack";
+          name: string;
+          calories: number;
+          protein_g: number;
+          carbs_g: number;
+          fat_g: number;
+          logged_at: Timestamptz;
+        }>
+      >;
+      water_entries: TableDef<
+        {
+          id: string;
+          user_id: string;
+          amount_ml: number;
+          logged_at: Timestamptz;
+          created_at: Timestamptz;
+        },
+        Partial<{ logged_at: Timestamptz }> & { user_id: string; amount_ml: number },
+        Partial<{ amount_ml: number; logged_at: Timestamptz }>
+      >;
+      nutrition_goals: TableDef<
+        {
+          user_id: string;
+          calories: number;
+          protein_g: number;
+          carbs_g: number;
+          fat_g: number;
+          water_ml: number;
+          updated_at: Timestamptz;
+        },
+        Partial<{ calories: number; protein_g: number; carbs_g: number; fat_g: number; water_ml: number }> & {
+          user_id: string;
+        },
+        Partial<{ calories: number; protein_g: number; carbs_g: number; fat_g: number; water_ml: number }>
+      >;
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
