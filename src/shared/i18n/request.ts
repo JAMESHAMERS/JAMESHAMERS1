@@ -15,6 +15,7 @@ const namespaces = [
   "settings",
   "modules",
   "dashboard",
+  "tasks",
 ] as const;
 
 async function loadMessages(locale: string) {

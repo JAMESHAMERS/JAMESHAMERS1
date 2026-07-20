@@ -1,0 +1,75 @@
+{
+  "views": {
+    "kanban": "Kanban",
+    "list": "Danh sách",
+    "calendar": "Lịch"
+  },
+  "actions": {
+    "newTask": "Công việc mới",
+    "addTask": "Thêm công việc",
+    "cancel": "Hủy"
+  },
+  "filters": {
+    "searchPlaceholder": "Tìm công việc...",
+    "priority": "Độ ưu tiên",
+    "labels": "Nhãn",
+    "clear": "Xóa bộ lọc"
+  },
+  "status": {
+    "todo": "Cần làm",
+    "in_progress": "Đang làm",
+    "in_review": "Đang xem xét",
+    "done": "Hoàn thành"
+  },
+  "priority": {
+    "low": "Thấp",
+    "medium": "Trung bình",
+    "high": "Cao",
+    "urgent": "Khẩn cấp"
+  },
+  "card": {
+    "overdue": "Quá hạn"
+  },
+  "kanban": {
+    "emptyColumn": "Thả công việc vào đây"
+  },
+  "list": {
+    "empty": "Không có công việc nào khớp với bộ lọc",
+    "sort": {
+      "manual": "Thứ tự thủ công",
+      "priority": "Sắp xếp theo độ ưu tiên",
+      "dueDate": "Sắp xếp theo hạn chót",
+      "created": "Sắp xếp theo ngày tạo"
+    }
+  },
+  "calendar": {
+    "today": "Hôm nay",
+    "more": "+{count} nữa",
+    "noDueDate": "Không có hạn chót"
+  },
+  "create": {
+    "title": "Công việc mới",
+    "namePlaceholder": "Tên công việc",
+    "submit": "Tạo công việc"
+  },
+  "detail": {
+    "untitled": "Công việc chưa đặt tên",
+    "editDescription": "Xem và chỉnh sửa chi tiết công việc, công việc con, nhãn, bình luận và tệp đính kèm.",
+    "descriptionPlaceholder": "Thêm mô tả...",
+    "dueDate": "Hạn chót",
+    "noDueDate": "Đặt hạn chót",
+    "reminder": "Nhắc nhở",
+    "labels": "Nhãn",
+    "noLabels": "Chưa có nhãn nào",
+    "newLabel": "Nhãn mới",
+    "subtasks": "Công việc con",
+    "addSubtask": "Thêm công việc con",
+    "attachments": "Tệp đính kèm",
+    "addAttachment": "Đính kèm tệp",
+    "comments": "Bình luận",
+    "addComment": "Viết bình luận...",
+    "confirmDelete": "Xóa công việc này?",
+    "delete": "Xóa",
+    "cancel": "Hủy"
+  }
+}

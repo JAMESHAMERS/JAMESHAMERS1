@@ -25,18 +25,30 @@ CRUD, data fetching, automated tests. The shell has module-scaffold pages
 - Route protection for `(dashboard)` — redirect unauthenticated users to a
   sign-in page under `(marketing)`.
 
-## Phase 2 — First vertical module: Tasks
+## Phase 2 — First vertical module: Tasks ✅
 
-Chosen first because it's the simplest CRUD shape and validates the module
-template end-to-end before it's copied five more times.
+Built ahead of Phase 1 (auth): with no `auth.uid()` yet, `SupabaseTaskRepository`
+can't authenticate, so the module runs on a `localStorage`-backed
+`LocalTaskRepository` behind the same `TaskRepository` port — see
+`src/modules/tasks/README.md` for the swap plan once auth lands.
 
-- `modules/tasks/domain` — `Task` entity, status/priority rules.
-- `modules/tasks/application` — `TaskRepository` port, use-cases
-  (create/update/complete/list).
-- `modules/tasks/infrastructure` — `SupabaseTaskRepository`.
-- `modules/tasks/presentation` — list view, create/edit form, filters.
-- Replace the Tasks route's `EmptyState` with the real view.
-- First real usage of `StatCard` (open/overdue counts) on the Overview page.
+- [x] `domain` — `Task`/`Subtask`/`Label`/`Comment`/`Attachment`, pure rules
+  (overdue, grouping, filtering, progress), `TaskRepository` port.
+- [x] `infrastructure` — `LocalTaskRepository` (active),
+  `SupabaseTaskRepository` (written, not wired in yet).
+- [x] `application` — Zustand store (`task-store.ts`) as the use-case layer.
+- [x] `presentation` — Kanban (drag-and-drop via `@dnd-kit`, cross-column +
+  reorder), List (grouped, sortable), Calendar (month grid, dot indicators
+  on mobile) views; task detail sheet (subtasks, labels, comments,
+  attachments, due date, reminder); create dialog; filters (search,
+  priority, labels).
+- [x] Schema extended (`0008_tasks_extended.sql`): labels, task_labels,
+  subtasks, task_comments, task_attachments, plus `position`/`reminder_at`
+  on `tasks`.
+- [ ] First real usage of `StatCard` (open/overdue counts) on the Overview
+  page — still pending, now that real task data exists to summarize.
+- [ ] Wire `SupabaseTaskRepository` in once Phase 1 ships (swap the one
+  `new LocalTaskRepository()` call in `task-store.ts`).
 
 ## Phase 3 — Habits
 

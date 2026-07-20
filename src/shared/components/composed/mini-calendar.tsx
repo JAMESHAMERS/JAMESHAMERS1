@@ -6,26 +6,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 
 import { Button } from "@/shared/components/ui/button";
+import { getMonthGrid, getWeekdayLabels, toDateKey } from "@/shared/lib/date-grid";
 import { cn } from "@/shared/lib/utils";
-
-function toDateKey(date: Date) {
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
-}
-
-function getMonthGrid(viewDate: Date) {
-  const year = viewDate.getFullYear();
-  const month = viewDate.getMonth();
-  const firstOfMonth = new Date(year, month, 1);
-  // Week starts on Monday.
-  const leadingDays = (firstOfMonth.getDay() + 6) % 7;
-  const gridStart = new Date(year, month, 1 - leadingDays);
-
-  return Array.from({ length: 42 }, (_, i) => {
-    const date = new Date(gridStart);
-    date.setDate(gridStart.getDate() + i);
-    return date;
-  });
-}
 
 interface MiniCalendarProps {
   /** Dates (as returned by `toDateKey`, i.e. "YYYY-M-D") that should show a marker dot. */
@@ -54,13 +36,7 @@ export function MiniCalendar({ markedDates, className }: MiniCalendarProps) {
     year: "numeric",
   }).format(viewDate);
 
-  const weekdayLabels = useMemo(() => {
-    const formatter = new Intl.DateTimeFormat(locale, { weekday: "narrow" });
-    // Jan 1 2024 was a Monday — a convenient anchor for a Monday-first week.
-    return Array.from({ length: 7 }, (_, i) =>
-      formatter.format(new Date(2024, 0, 1 + i)),
-    );
-  }, [locale]);
+  const weekdayLabels = useMemo(() => getWeekdayLabels(locale), [locale]);
 
   return (
     <div className={cn("select-none", className)}>

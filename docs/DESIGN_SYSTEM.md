@@ -56,9 +56,10 @@ Tailwind class (`bg-primary`, `text-muted-foreground`, `border-border`).
 
 `src/shared/components/`:
 
-- **`ui/`** — shadcn primitives: `button`, `card`, `input`, `label`,
-  `separator`, `avatar`, `badge`, `dialog`, `sheet`, `dropdown-menu`,
-  `tabs`, `tooltip`, `scroll-area`, `skeleton`, `select`, `switch`,
+- **`ui/`** — shadcn primitives: `button`, `card`, `input`, `textarea`,
+  `label`, `separator`, `avatar`, `badge`, `dialog`, `sheet`,
+  `dropdown-menu`, `popover`, `tabs`, `tooltip`, `scroll-area`, `skeleton`,
+  `select`, `switch`, `checkbox`, `progress`, `chart` (recharts wrapper),
   `sonner` (toasts). Installed via the standard shadcn source pattern
   (Radix + `class-variance-authority` + `cn()`), not generated code
   no one has read.
@@ -70,11 +71,21 @@ Tailwind class (`bg-primary`, `text-muted-foreground`, `border-border`).
     "no items yet" states once modules have data.
   - `StatCard` — metric tile, ready for module dashboards (not wired to
     data yet).
+  - `WidgetCard` — icon/title/"view all" shell every dashboard widget is
+    built on.
+  - `MiniCalendar`, `DatePicker` — share the month-grid math in
+    `shared/lib/date-grid.ts`; the former is read-only display, the latter
+    adds click-to-select in a `Popover`.
   - `ThemeToggle`, `LocaleSwitcher` — dropdown controls combining `ui/`
     components with `next-themes` / next-intl state.
   - `PageTransition` — wraps route content in a small fade/slide
     (Framer Motion) on navigation.
 - **`providers/`** — `ThemeProvider` (wraps `next-themes`).
+
+Module-specific composed components (e.g. `modules/tasks/presentation/components/`)
+follow the same rule — built from `ui/`, never one-off markup — but live in
+their module, not `shared`, since nothing outside Tasks needs a
+`PriorityIcon` or `SubtaskProgress`.
 
 ## Motion
 

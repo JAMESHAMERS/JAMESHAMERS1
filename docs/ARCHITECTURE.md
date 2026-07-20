@@ -51,6 +51,12 @@ src/
   modules/
     dashboard/                      # app shell — nav, layout (no domain logic)
     settings/                       # appearance/language preferences
+    overview/                       # /dashboard widgets — view-model + mock aggregation
+    tasks/                          # full 4-layer module — see "Client state" below
+      domain/                       # types.ts, rules.ts, repository.ts (port)
+      infrastructure/                # LocalTaskRepository (active), SupabaseTaskRepository
+      application/                  # task-store.ts (Zustand)
+      presentation/                 # views/ (kanban, list, calendar), components/
     _template/                      # copy this to start a new module
       domain/
       application/
@@ -59,12 +65,14 @@ src/
   shared/
     components/
       ui/                           # shadcn/ui primitives (Radix-based)
-      composed/                     # PageHeader, EmptyState, StatCard, ThemeToggle...
+      composed/                     # PageHeader, EmptyState, StatCard, DatePicker, ThemeToggle...
       providers/                    # ThemeProvider
     config/                         # site.ts, nav.ts — declarative registries
     i18n/                           # next-intl routing/navigation/request config + messages
     lib/
       utils.ts                      # cn()
+      date-grid.ts                  # month-grid math shared by every calendar UI
+      format.ts                     # currency/bytes/relative-time formatting
       supabase/                     # client.ts (browser), server.ts (server)
     types/                          # database.types.ts, shared domain-agnostic types
 supabase/
@@ -82,6 +90,39 @@ script (`npm run new-module`) because at this stage there's exactly one
 real module pattern to follow and no team process yet that a generator
 would need to enforce. Revisit this once 3+ modules exist and the copy-paste
 starts drifting.
+
+## Client state & drag-and-drop (Tasks module)
+
+`modules/tasks` is the first module with all four layers filled in for
+real, and the first to need genuinely interactive client state (Kanban
+drag-and-drop, a task detail editor). Two decisions worth calling out
+since they shape how any future module with similar needs should look:
+
+- **Zustand as the "application" layer.** For a client-heavy module, the
+  use-cases *are* the store's actions — each one (`createTask`, `moveTask`,
+  `addSubtask`, ...) is a thin call into the injected `TaskRepository`
+  followed by a state patch mirroring what was just persisted. Server
+  Components / Server Actions remain the right shape for modules that are
+  mostly read-and-render; Zustand is only pulled in where a module needs
+  shared, cross-component client state that outlives a single component
+  tree (here: the board, the filters, and the detail sheet all reading/
+  writing the same task list).
+- **`@dnd-kit` for drag-and-drop**, with a "drop to commit" model rather
+  than live re-parenting during drag-over: `onDragEnd` computes the target
+  column/index once and calls `moveTask`/`reorderTasks`, with a
+  `DragOverlay` for visual feedback while dragging. Simpler and less
+  bug-prone than live-shuffling multiple `SortableContext` arrays on every
+  `dragOver` event, at the cost of the list not visually reordering until
+  drop — an accepted trade-off here, not a limitation to design around
+  elsewhere by default.
+
+`modules/tasks` currently runs on `LocalTaskRepository`
+(`localStorage`-backed) instead of `SupabaseTaskRepository` because there's
+no `auth.uid()` yet for Row Level Security to scope rows to (see
+`docs/ROADMAP.md` Phase 1). Both implement the same `TaskRepository` port
+from `domain/repository.ts`, so switching is a one-line change in
+`application/task-store.ts`, not a rewrite — see
+`src/modules/tasks/README.md`.
 
 ## Routing & i18n
 
@@ -132,6 +173,7 @@ starts drifting.
 
 ## What this foundation deliberately does not include
 
-No auth flow, no CRUD for any module, no real data fetching, no tests.
-Those are feature work layered on top of this shell — see
-`docs/ROADMAP.md`.
+No auth flow, no tests, and — outside of `modules/tasks` — no module has
+real CRUD yet (`habits`/`finance`/`journal`/`goals` are still route
+placeholders). Tasks runs on local-only persistence rather than Supabase
+for the reason explained above. See `docs/ROADMAP.md` for what's next.
