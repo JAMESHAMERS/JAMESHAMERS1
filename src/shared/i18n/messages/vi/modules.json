@@ -37,11 +37,7 @@
   },
   "journal": {
     "title": "Nhật ký",
-    "description": "Suy ngẫm và ghi lại những điều quan trọng.",
-    "empty": {
-      "title": "Khung module Nhật ký",
-      "description": "Tuyến đường, mục điều hướng và bố cục đã sẵn sàng. Tính năng nhật ký sẽ được xây dựng ở giai đoạn sau."
-    }
+    "description": "Ghi chú hằng ngày, cảm xúc, ảnh và ghi âm trong một dòng thời gian."
   },
   "goals": {
     "title": "Mục tiêu",

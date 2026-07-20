@@ -89,10 +89,6 @@ ahead of auth in Phase 2 — it was requested next. Same pattern as
   of `chart-1..5`, so the color stays meaningful — not just decorative —
   across both themes).
 
-## Phase 6 — Journal
-
-- Rich-text or markdown entry editor, mood tracking, entry search.
-
 ## Phase 7 — Meals ✅
 
 Built out of order (before Habits/Goals/Journal) for the same reason
@@ -148,6 +144,37 @@ auth.
 - [x] First module to nest a second `Tabs` instance inside a `Sheet`
   (Tasks' detail sheet is one long scroll; Travel's has too much content
   per trip for that to work).
+
+## Phase 9 — Journal ✅
+
+Built out of order (before Habits/Goals) for the same reason Tasks,
+Finance, Meals, and Travel jumped the queue — it was requested next. Same
+pattern as `modules/finance`: full 4 layers, `LocalJournalRepository`
+active today, `SupabaseJournalRepository` written and waiting on Phase 1
+auth. Reuses the pre-existing `0006_journal.sql` base schema from Phase 0,
+extended with tags/photos/voice notes rather than replaced.
+
+- [x] `domain` — `JournalEntry` (title/content/mood/entryDate/tagIds),
+  `MoodLevel` (5-point great→awful scale), `JournalTag`, `JournalPhoto`,
+  `JournalVoiceNote`; pure rules (search/tag/mood filtering, month
+  grouping, mood trend/distribution/average, a journaling streak, and
+  `isEntryEmpty` for discarding blank drafts).
+- [x] `infrastructure` — `LocalJournalRepository` seeded with ~3 months of
+  realistic entries including a 5-day streak; `SupabaseJournalRepository`
+  (not wired in).
+- [x] `application` — Zustand store (`journal-store.ts`).
+- [x] `presentation` — two tabs: Timeline (month-grouped feed with a
+  search/tag/mood filter bar, mirroring Finance's
+  `TransactionFiltersBar`), Mood (streak/average/total-entries stat cards,
+  a mood trend line chart, a mood distribution donut). Clicking an entry —
+  or "New entry", which creates a draft and opens it immediately — opens
+  `EntryDetailSheet`, reusing the Tasks/Travel `Sheet` detail pattern.
+- [x] New schema (`0012_journal_extended.sql`): `journal_tags`,
+  `journal_entry_tags`, `journal_entry_photos`,
+  `journal_entry_voice_notes` tables, all with RLS.
+- [x] First module to use `MediaRecorder`/`getUserMedia` for real
+  in-browser audio recording (`VoiceNoteRecorder`), with mic
+  permission/device failures caught and shown inline.
 
 ## Ongoing / cross-cutting (pick up as needed, not a phase)
 

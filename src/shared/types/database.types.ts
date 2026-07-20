@@ -486,6 +486,40 @@ export interface Database {
         Partial<{ title: string; body: string }> & { trip_id: string; user_id: string },
         Partial<{ title: string; body: string }>
       >;
+      journal_tags: TableDef<
+        { id: string; user_id: string; name: string; color: string; created_at: Timestamptz },
+        { user_id: string; name: string; color?: string },
+        Partial<{ name: string; color: string }>
+      >;
+      journal_entry_tags: TableDef<
+        { entry_id: string; tag_id: string; user_id: string },
+        { entry_id: string; tag_id: string; user_id: string },
+        Partial<{ entry_id: string; tag_id: string; user_id: string }>
+      >;
+      journal_entry_photos: TableDef<
+        {
+          id: string;
+          entry_id: string;
+          user_id: string;
+          storage_path: string;
+          caption: string;
+          created_at: Timestamptz;
+        },
+        Partial<{ caption: string }> & { entry_id: string; user_id: string; storage_path: string },
+        Partial<{ caption: string }>
+      >;
+      journal_entry_voice_notes: TableDef<
+        {
+          id: string;
+          entry_id: string;
+          user_id: string;
+          storage_path: string;
+          duration_seconds: number;
+          created_at: Timestamptz;
+        },
+        Partial<{ duration_seconds: number }> & { entry_id: string; user_id: string; storage_path: string },
+        Partial<{ duration_seconds: number }>
+      >;
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;

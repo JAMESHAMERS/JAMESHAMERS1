@@ -74,6 +74,11 @@ src/
       presentation/                 # tabs/ (trips, statistics), detail-tabs/ (itinerary,
                                      # expenses, photos, map, notes, timeline — inside the
                                      # per-trip Sheet), components/
+    journal/                        # full 4-layer module, same pattern as tasks/ and finance/
+      domain/                       # types.ts, rules.ts, repository.ts (port)
+      infrastructure/                # LocalJournalRepository (active), SupabaseJournalRepository
+      application/                  # journal-store.ts (Zustand)
+      presentation/                 # tabs/ (timeline, mood), components/
     _template/                      # copy this to start a new module
       domain/
       application/
@@ -181,6 +186,26 @@ tile provider, since there's no map API key/network dependency to lean on
 `URL.createObjectURL` trade-off Tasks' attachments already made, reused
 here for trip photos.
 
+`modules/journal` repeats the same shape a fifth time (`JournalRepository`
+port, `LocalJournalRepository` active, `SupabaseJournalRepository`
+waiting on auth) and reuses Travel's `URL.createObjectURL` trade-off for
+photos, extending it to real in-browser audio recording:
+`VoiceNoteRecorder` calls `MediaRecorder`/`getUserMedia` directly (no
+upload backend, same non-persisting object URL as photos), catching mic
+permission/device failures inline instead of letting them throw. Its
+`EntryDetailSheet` reuses the Tasks/Travel `Sheet` detail-view pattern,
+but with a twist: clicking "New entry" creates the row immediately and
+opens it straight into the editor (content-heavy entries don't fit a
+small create dialog the way a transaction or trip does), and
+`domain/rules.ts#isEntryEmpty` silently deletes that draft if the sheet
+is closed without anything written, so an abandoned "New entry" click
+never leaves a blank card in the Timeline. A `JournalEntry`'s mood also
+drives its own semantic color gradient (`success` → `destructive`) in
+`journal-meta.ts`, unlike the arbitrary `chart-1..5` category colors used
+for itinerary/expense/tag variety elsewhere — mood *is* a meaningful
+positive/negative signal, the same reasoning Finance applied to
+income/expense.
+
 ## Charts (recharts)
 
 Two non-obvious things learned building the Finance module's charts,
@@ -256,7 +281,7 @@ worth knowing before adding more:
 ## What this foundation deliberately does not include
 
 No auth flow, no tests, and — outside of `modules/tasks`, `modules/finance`,
-`modules/meals`, and `modules/travel` — no module has real CRUD yet
-(`habits`/`journal`/`goals` are still route placeholders). All four real
-modules run on local-only persistence rather than Supabase for the reason
-explained above. See `docs/ROADMAP.md` for what's next.
+`modules/meals`, `modules/travel`, and `modules/journal` — no module has
+real CRUD yet (`habits`/`goals` are still route placeholders). All five
+real modules run on local-only persistence rather than Supabase for the
+reason explained above. See `docs/ROADMAP.md` for what's next.

@@ -37,11 +37,7 @@
   },
   "journal": {
     "title": "Journal",
-    "description": "Reflect and write things down.",
-    "empty": {
-      "title": "Journal module scaffold",
-      "description": "The route, navigation entry, and layout are ready. Journaling will be built on top of this in a later phase."
-    }
+    "description": "Daily notes, mood, photos, and voice memos in one timeline."
   },
   "goals": {
     "title": "Goals",

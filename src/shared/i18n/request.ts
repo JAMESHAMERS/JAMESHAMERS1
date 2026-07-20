@@ -19,6 +19,7 @@ const namespaces = [
   "finance",
   "meals",
   "travel",
+  "journal",
 ] as const;
 
 async function loadMessages(locale: string) {
