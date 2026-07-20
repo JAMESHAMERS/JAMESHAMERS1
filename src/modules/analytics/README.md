@@ -57,9 +57,12 @@ exception to it — not a loophole. The boundary that still holds:
 This keeps the rule meaningful for every *feature* module (Tasks still
 can't reach into Finance's business logic) while letting a genuinely
 cross-cutting *reporting* module do the one thing it exists to do: show
-real numbers from real data. If a second module ever needed this same
-kind of read access, that would be the signal to extract a proper shared
-read layer instead of repeating the exception.
+real numbers from real data. `modules/assistant` is the second module
+that needed this same read access (see its own README) — at ~30 lines
+of `Promise.all` over constructor calls each, and each needing a
+different subset of sibling repositories, extracting a shared layer
+was judged to add more machinery than the duplication it would remove.
+Revisit if a third module needs this.
 
 ## Why Habits and Goals show an empty state
 

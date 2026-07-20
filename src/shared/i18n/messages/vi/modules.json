@@ -54,5 +54,9 @@
   "analytics": {
     "title": "Phân tích",
     "description": "Bảng điều khiển trực quan cho năng suất, tài chính, bữa ăn, cảm xúc và du lịch."
+  },
+  "assistant": {
+    "title": "Trợ lý",
+    "description": "Hỏi hôm nay nên làm gì, đã chi bao nhiêu tiền, hoặc mục tiêu đang tiến triển ra sao."
   }
 }

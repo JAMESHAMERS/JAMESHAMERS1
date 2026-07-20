@@ -54,5 +54,9 @@
   "analytics": {
     "title": "Analytics",
     "description": "Interactive dashboards across productivity, finance, meals, mood, and travel."
+  },
+  "assistant": {
+    "title": "Assistant",
+    "description": "Ask what to do today, how much you've spent, or how your goals are tracking."
   }
 }

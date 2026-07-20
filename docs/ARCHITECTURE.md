@@ -22,10 +22,11 @@ what comes after this foundation phase.
    Supabase adapter) be replaced without touching business logic.
 4. **Shared vs. module-owned.** If more than one module would need to
    import something from a sibling module, it belongs in `src/shared`
-   instead. Modules should never import from each other directly. The one
-   documented exception is `modules/analytics`, a cross-cutting reporting
-   module with no data of its own — see "Cross-module reads (Analytics)"
-   below for the narrow, scoped shape that exception takes.
+   instead. Modules should never import from each other directly. The
+   documented exceptions are `modules/analytics` and `modules/assistant`,
+   both cross-cutting modules with no data of their own — see
+   "Cross-module reads (Analytics & Assistant)" below for the narrow,
+   scoped shape that exception takes.
 
 ## Folder structure
 
@@ -49,7 +50,11 @@ src/
         journal/page.tsx
         goals/page.tsx
         analytics/page.tsx
+        assistant/page.tsx
         settings/page.tsx
+    api/
+      assistant/route.ts            # first Route Handler in the app — see
+                                     # "AI Assistant" below
     not-found.tsx                   # fallback for paths outside [locale]
     globals.css                     # design tokens (see DESIGN_SYSTEM.md)
   proxy.ts                          # next-intl locale routing (Next 16's
@@ -95,6 +100,15 @@ src/
       presentation/                 # tabs/ (productivity, finance, habits, goals, meals,
                                      # mood, travel), components/ (TrendChart, DonutChart —
                                      # generic, shared by every tab)
+    assistant/                      # cross-cutting module — no data of its own,
+                                     # see "Cross-module reads (Analytics & Assistant)" below
+      domain/                       # types.ts, tools.ts (MCP-compatible tool registry),
+                                     # rules.ts (per-tool summarizers + local answer engine)
+      infrastructure/                # read-sources.ts (cross-module read, mirrors Analytics),
+                                     # tool-executor.ts, anthropic-tools.ts (server-only)
+      application/                  # assistant-store.ts (Zustand) — chat history, hydrate(),
+                                     # sendMessage() — the client-side leg of the tool-use loop
+      presentation/                 # assistant-view.tsx (chat UI), components/
     _template/                      # copy this to start a new module
       domain/
       application/
@@ -222,38 +236,106 @@ for itinerary/expense/tag variety elsewhere — mood *is* a meaningful
 positive/negative signal, the same reasoning Finance applied to
 income/expense.
 
-## Cross-module reads (Analytics)
+## Cross-module reads (Analytics & Assistant)
 
-`modules/analytics` breaks Principle 4 on purpose, and only it does.
-Every other module runs fully isolated — Tasks has no idea Finance
-exists — but a dashboard module that shows "Productivity, Finance,
-Meals, Mood, Travel" *needs* those five modules' data to be anything
-more than decoration. The alternative (mock numbers, like `overview`'s
-current placeholder widgets) was considered and rejected: a dashboard
-that doesn't reflect what's actually in your Tasks/Finance/Meals/Travel/
-Journal data isn't useful, it's just decoration with charts. See
-`src/modules/analytics/README.md` for the full reasoning; the short
-version is a narrow, two-part carve-out:
+`modules/analytics` and `modules/assistant` break Principle 4 on
+purpose, and only they do. Every other module runs fully isolated —
+Tasks has no idea Finance exists — but a dashboard that shows
+"Productivity, Finance, Meals, Mood, Travel", or an assistant that
+answers "how much did I spend this month", *needs* those modules' data
+to be anything more than decoration. The alternative (mock numbers,
+like `overview`'s current placeholder widgets) was considered and
+rejected: a dashboard or assistant that doesn't reflect what's actually
+in your Tasks/Finance/Meals/Travel/Journal data isn't useful, it's just
+decoration. See `src/modules/analytics/README.md` and
+`src/modules/assistant/README.md` for the full per-module reasoning;
+the short version is a narrow, two-part carve-out, identical for both:
 
 - **In bounds:** a sibling module's `domain` (types + pure `rules.ts`
   functions — no side effects) and its `infrastructure`'s
-  `Local<X>Repository` classes, read-only. `analytics-store.ts`
-  constructs all five directly in its own `hydrate()`
-  (`infrastructure/read-sources.ts`) rather than depending on those
-  modules' own Zustand stores being hydrated, so Analytics shows real
+  `Local<X>Repository` classes, read-only. Both modules construct every
+  sibling repository directly in their own `hydrate()`
+  (`infrastructure/read-sources.ts` in each), rather than depending on
+  those modules' own Zustand stores being hydrated, so both show real
   data even for a user who's never opened /tasks or /finance this
   session.
 - **Out of bounds, same as ever:** a sibling module's `application`
   (its store) or `presentation` (its components). Analytics rebuilds its
   own small `analytics-meta.ts` for status/priority/mood/category colors
-  instead of importing each module's own — a little color-constant
-  duplication, the same trade-off every module's category colors already
-  accept over a shared lookup table (Principle 4's own reasoning, applied
-  to Analytics itself).
+  instead of importing each module's own; Assistant needs no such
+  metadata (it only produces text) — a little duplication where it does
+  apply, the same trade-off every module's category colors already
+  accept over a shared lookup table (Principle 4's own reasoning,
+  applied to both modules themselves).
 
-If a second module ever needed this same read access, that's the signal
-to extract a real shared read layer instead of repeating the exception a
-second time.
+Assistant is the second module to need this read access — the point at
+which the Analytics doc originally said "extract a real shared read
+layer instead of repeating the exception a second time." That was
+reconsidered here: both `read-sources.ts` files are ~30 lines of
+`Promise.all` over constructor calls, and each module needs a different
+subset of sibling repositories (Assistant skips `tripExpenses`,
+Analytics skips nothing). Extracting a shared layer now would mean
+either over-fetching for one caller or a parameterized abstraction with
+exactly two call sites — more machinery than the duplication it removes.
+Revisit if a third module needs this.
+
+## AI Assistant (Claude API + MCP-shaped tools)
+
+`modules/assistant` (`/assistant`, `src/app/api/assistant/route.ts` —
+the app's first Route Handler) answers questions like "what should I do
+today" using real data, with or without an Anthropic API key configured.
+
+- **Tool registry, MCP-compatible shape.** `domain/tools.ts` defines six
+  read-only tools (`get_tasks_today`, `get_finance_month_summary`,
+  `get_goals_status`, `get_journal_mood`, `get_meals_today`,
+  `get_travel_upcoming`) as plain `{ name, description, inputSchema }`
+  objects — a JSON Schema input, the same shape both MCP and the
+  Anthropic API expect. "MCP-compatible" here means the registry is
+  shaped so a future live MCP server transport
+  (`@modelcontextprotocol/sdk`, e.g. mounted at `/api/mcp`) could expose
+  these same definitions to external MCP clients without a contract
+  change — not that a transport is running today. No external MCP
+  client exists yet to talk to it; standing one up now would be
+  speculative infrastructure with no consumer, the same reasoning that
+  keeps every module's `Supabase<X>Repository` written but not wired in
+  until Phase 1 auth lands. `infrastructure/anthropic-tools.ts` converts
+  the registry to the Anthropic SDK's `Tool[]` shape for the real-API
+  path.
+- **Tool execution is client-side, on purpose.** Every tool reads
+  sibling `Local<X>Repository` data, which lives in `localStorage` — a
+  server Route Handler can never reach it. So `/api/assistant` stays
+  deliberately thin: `POST` proxies one `client.messages.create` call
+  (model `claude-opus-4-8`, `thinking: {type: "adaptive"}`, the tool
+  registry attached) and returns the raw response. The multi-turn
+  tool-use loop itself runs in `application/assistant-store.ts`: it
+  posts the growing message history to the route, and whenever the
+  response's `stop_reason` is `"tool_use"`, executes the requested
+  tool(s) locally via `infrastructure/tool-executor.ts` against an
+  already-hydrated snapshot, appends the `tool_result` blocks, and posts
+  again — capped at 4 iterations. This client/server split is unusual
+  for a "tool use" implementation but is what this app's local-first
+  data model requires; it would collapse into a normal server-side loop
+  once Supabase reads replace `localStorage` (Phase 1).
+- **Always answers, key or no key.** `GET /api/assistant` reports
+  whether `ANTHROPIC_API_KEY` is set server-side (never exposed to the
+  client). Without it — the state of this repository today, since no
+  Anthropic credential is configured — `assistant-store.ts` skips the
+  API loop entirely and answers via `domain/rules.ts#localAnswer`: a
+  deterministic template engine that keyword-matches the question
+  (English and Vietnamese) against the same six tools, executes them
+  against the snapshot, and fills in an i18n template
+  (`assistant.json#local`). The same fallback fires if the real API call
+  errors mid-conversation. This mirrors every other module's "Local repo
+  active, Supabase repo written but not wired" pattern: the real
+  integration is fully implemented, just inert until a credential
+  exists.
+- **Honest about Goals.** `get_goals_status` always reports
+  `trackingAvailable: false` — the Goals module has no data model yet
+  (`docs/ROADMAP.md` Phase 4). Asking "which goals are behind schedule"
+  gets an honest "not built yet" answer in both the local engine and the
+  real API path (the system prompt instructs Claude the same way),
+  never a fabricated one — consistent with how Analytics renders Goals
+  as an empty state rather than invented numbers.
 
 ## Charts (recharts)
 
@@ -292,7 +374,7 @@ worth knowing before adding more:
   modules should import navigation from there, not `next/navigation`.
 - Messages are split into small per-namespace JSON files
   (`common`, `nav`, `theme`, `settings`, `modules`, plus one per feature
-  module: `tasks`, `finance`, `meals`, ...) under
+  module: `tasks`, `finance`, `meals`, `assistant`, ...) under
   `src/shared/i18n/messages/{en,vi}/` instead of one large file, so a new
   module adds one file rather than growing a monolith. `request.ts` merges
   them per request.
@@ -333,7 +415,11 @@ No auth flow, no tests, and — outside of `modules/tasks`, `modules/finance`,
 `modules/meals`, `modules/travel`, and `modules/journal` — no module has
 real CRUD yet (`habits`/`goals` are still route placeholders). All five
 real modules run on local-only persistence rather than Supabase for the
-reason explained above. `modules/analytics` reads all five (see
-"Cross-module reads" above) but owns no data itself, so its Habits and
-Goals tabs are honest empty states rather than fabricated charts. See
-`docs/ROADMAP.md` for what's next.
+reason explained above. `modules/analytics` and `modules/assistant` read
+those five (see "Cross-module reads" above) but own no data themselves,
+so Analytics' Habits/Goals tabs and the Assistant's answers about goals
+are honest empty states / honest text rather than fabricated numbers. No
+Anthropic API key is configured in this environment, so the Assistant
+runs on its local deterministic engine only — see "AI Assistant" above
+for the real-API path that activates once `ANTHROPIC_API_KEY` is set.
+See `docs/ROADMAP.md` for what's next.

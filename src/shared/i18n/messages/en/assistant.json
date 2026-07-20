@@ -1,0 +1,50 @@
+{
+  "inputPlaceholder": "Ask about your tasks, spending, mood, meals, or trips...",
+  "send": "Send",
+  "thinking": "Thinking...",
+  "emptyTitle": "How can I help?",
+  "emptyDescription": "Ask me anything about your day — I'll pull real data from your LifeOS to answer.",
+  "suggestions": {
+    "today": "What should I do today?",
+    "spending": "How much did I spend this month?",
+    "goals": "Which goals are behind schedule?",
+    "mood": "How has my mood been lately?"
+  },
+  "poweredBy": {
+    "api": "Answered by Claude",
+    "local": "Answered locally — no AI key configured on this server"
+  },
+  "tools": {
+    "get_tasks_today": "Tasks",
+    "get_finance_month_summary": "Finance",
+    "get_goals_status": "Goals",
+    "get_journal_mood": "Journal",
+    "get_meals_today": "Meals",
+    "get_travel_upcoming": "Travel"
+  },
+  "local": {
+    "tasksToday": {
+      "none": "You have no tasks due today or overdue — nothing urgent on your plate.",
+      "some": "You have {dueTodayCount} task(s) due today and {overdueCount} overdue. Top priority: \"{topTitle}\"."
+    },
+    "finance": {
+      "withCategory": "You've spent {expense} this month so far, mostly on {categoryName} ({categoryTotal}).",
+      "noExpenses": "No expenses logged this month yet. Income so far: {income}."
+    },
+    "goals": {
+      "unavailable": "Goal tracking isn't built into LifeOS yet, so I can't tell you which goals are behind schedule — check back once the Goals module ships."
+    },
+    "mood": {
+      "none": "No mood entries in the last two weeks yet — log a journal entry and I can track this for you.",
+      "some": "You're on a {streak}-day journaling streak, averaging {averageMoodScore}/5 mood over the last two weeks."
+    },
+    "meals": {
+      "summary": "You've logged {calories}/{calorieGoal} kcal and {waterMl}/{waterGoalMl} ml of water today."
+    },
+    "travel": {
+      "ongoing": "You're currently on your trip to {name}, {daysRemaining} day(s) left.",
+      "upcoming": "Your next trip, {name}, starts in {daysUntil} day(s).",
+      "none": "No upcoming or ongoing trips planned."
+    }
+  }
+}

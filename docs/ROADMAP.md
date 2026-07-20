@@ -210,6 +210,55 @@ their `application` stores or `presentation` components).
   than fabricated numbers.
 - [x] No new schema — nothing here to persist.
 
+## Phase 11 — AI Assistant ✅
+
+Built out of order for the same reason every module since Tasks jumped
+the queue — it was requested next. Like Analytics, not a plain 4-layer
+data module: it owns no data and, unlike every prior module, is the
+first to talk to an external API and the first to need a server-side
+Route Handler. See "Cross-module reads (Analytics & Assistant)" and
+"AI Assistant (Claude API + MCP-shaped tools)" in `docs/ARCHITECTURE.md`,
+and `src/modules/assistant/README.md`, for the full shape.
+
+- [x] `domain/tools.ts` — a six-tool registry in MCP-compatible shape
+  (`{ name, description, inputSchema }`, JSON Schema input) covering
+  tasks-today, this-month finance, goals status (honest "not built"),
+  journal mood, meals-today, and upcoming travel.
+- [x] `domain/rules.ts` — per-tool summarizers reusing sibling modules'
+  own `domain/rules.ts` functions (same pattern Analytics established),
+  a bilingual (en/vi) keyword intent matcher, and `localAnswer()`, a
+  deterministic template-based answer engine that needs no API key.
+- [x] `infrastructure/read-sources.ts` — cross-module snapshot read,
+  mirrors `analytics/infrastructure/read-sources.ts`.
+  `infrastructure/tool-executor.ts` — executes one named tool against
+  that snapshot. `infrastructure/anthropic-tools.ts` — converts the
+  registry to the Anthropic SDK's tool shape (server-only).
+- [x] `src/app/api/assistant/route.ts` — the app's first Route Handler.
+  `GET` reports whether `ANTHROPIC_API_KEY` is configured; `POST` proxies
+  one `claude-opus-4-8` `messages.create` call with the tool registry
+  attached. Deliberately thin — see "AI Assistant" in
+  `docs/ARCHITECTURE.md` for why tool *execution* can't live here.
+- [x] `application/assistant-store.ts` — chat history, hydrate(), and
+  `sendMessage()`, which runs the real multi-turn tool-use loop
+  client-side (capped at 4 iterations) when an API key is available,
+  falling back to `localAnswer()` with no key or on any failure — the
+  Assistant always answers something.
+- [x] `presentation/assistant-view.tsx` — a chat UI (message bubbles,
+  tool-citation chips, suggested prompts for the brief's three example
+  questions plus a mood question, a badge showing whether the last
+  answer came from Claude or the local engine).
+- [x] Nav entry, `assistant.json` i18n namespace (en/vi, including
+  templated local-engine answer strings), route wiring.
+- [x] No new schema — nothing here to persist. `ANTHROPIC_API_KEY` added
+  to `.env.example` (server-only, optional).
+- [ ] Swap the client/server split tool-use loop for a normal
+  server-side loop once Supabase reads replace `localStorage` (Phase 1) —
+  tracked in `docs/ARCHITECTURE.md`.
+- [ ] Stand up a live MCP server transport (`@modelcontextprotocol/sdk`)
+  exposing `domain/tools.ts` to external MCP clients, once one exists to
+  connect — the registry's shape already supports this without a
+  contract change.
+
 ## Ongoing / cross-cutting (pick up as needed, not a phase)
 
 - Automated tests: unit tests for each module's `domain` layer as it's
