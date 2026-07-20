@@ -28,7 +28,8 @@ All colors are OKLCH, defined once per mode in `globals.css`:
 | `success` / `warning` (+ `-foreground`) | Status colors — added beyond the shadcn default set since a life-management app needs "done"/"at risk" states from day one |
 | `border` / `input` / `ring` | Structural lines and focus rings |
 | `sidebar*` | Sidebar has its own token set so it can read as a distinct surface from the main canvas in both themes |
-| `chart-1..5` | Reserved for future data visualization (finance charts, habit graphs) |
+| `chart-1..5` | Multi-series data visualization (e.g. a legend of categories). Deliberately different hues per mode, like the rest of the shadcn chart palette — good for series variety, not for a single metric that needs to look the same in both themes. |
+| `chart-accent` | Single consistent hue (only lightness/chroma tuned) across light/dark, for one-metric visuals like a score gauge where the color is part of the metric's identity and shouldn't flip hue when the user switches theme. |
 
 Never hardcode a hex/oklch value in a component — reference the semantic
 Tailwind class (`bg-primary`, `text-muted-foreground`, `border-border`).

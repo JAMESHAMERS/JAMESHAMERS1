@@ -8,7 +8,14 @@ import { routing } from "./routing";
  * one file, not editing a monolith. They're merged here into the single
  * object next-intl expects at runtime.
  */
-const namespaces = ["common", "nav", "theme", "settings", "modules"] as const;
+const namespaces = [
+  "common",
+  "nav",
+  "theme",
+  "settings",
+  "modules",
+  "dashboard",
+] as const;
 
 async function loadMessages(locale: string) {
   const modules = await Promise.all(

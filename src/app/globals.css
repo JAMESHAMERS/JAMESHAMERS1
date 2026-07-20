@@ -58,6 +58,11 @@
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
+  /* Same hue in both modes (only lightness/chroma tuned for contrast) —
+     unlike chart-1..5 above, which intentionally vary per mode for series
+     variety, this is for single-metric visuals (e.g. a score gauge) that
+     need one consistent brand color across light/dark. */
+  --chart-accent: oklch(0.56 0.19 275);
 
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
@@ -109,6 +114,7 @@
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
+  --chart-accent: oklch(0.68 0.19 275);
 
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
@@ -168,6 +174,7 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-chart-accent: var(--chart-accent);
 
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
