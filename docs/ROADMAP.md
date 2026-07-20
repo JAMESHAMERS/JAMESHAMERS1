@@ -62,11 +62,32 @@ can't authenticate, so the module runs on a `localStorage`-backed
   tasks) — data-model decision to make once Tasks/Habits are real and the
   linkage need is concrete, not guessed at now.
 
-## Phase 5 — Finance
+## Phase 5 — Finance ✅
 
-- Transactions list, category budgets vs. actuals.
-- First real use of the reserved `chart-1..5` design tokens for spend
-  visualizations.
+Built out of order (before Habits/Goals) for the same reason Tasks jumped
+ahead of auth in Phase 2 — it was requested next. Same pattern as
+`modules/tasks`: full 4 layers, `LocalFinanceRepository` active today,
+`SupabaseFinanceRepository` written and waiting on Phase 1 auth.
+
+- [x] `domain` — `Transaction` (income/expense/saving/investment),
+  `Category` (user-defined, scoped to a type), `Budget`; pure rules
+  (monthly breakdown, category breakdown, budget progress, search/filter).
+- [x] `infrastructure` — `LocalTaskRepository`-equivalent
+  `LocalFinanceRepository` seeded with ~4 months of realistic transactions;
+  `SupabaseFinanceRepository` (not wired in).
+- [x] `application` — Zustand store (`finance-store.ts`).
+- [x] `presentation` — four tabs: Overview (stat cards, cash-flow chart,
+  expense donut, recent transactions), Transactions (search + type/category
+  filters, add/edit/delete), Budgets (monthly progress per category),
+  Reports (month picker, income/expense/saving/investment bar chart,
+  category donut, 6-month cash-flow trend).
+- [x] Schema extended (`0009_finance_extended.sql`): `categories` table,
+  `saving`/`investment` added to `transactions.type`, free-text `category`
+  columns on `transactions`/`budgets` replaced with a `category_id` FK.
+- [x] First real use of the `chart-accent` token pattern for finance charts
+  (income/expense use the semantic `success`/`destructive` tokens instead
+  of `chart-1..5`, so the color stays meaningful — not just decorative —
+  across both themes).
 
 ## Phase 6 — Journal
 

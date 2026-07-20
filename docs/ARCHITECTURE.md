@@ -57,6 +57,11 @@ src/
       infrastructure/                # LocalTaskRepository (active), SupabaseTaskRepository
       application/                  # task-store.ts (Zustand)
       presentation/                 # views/ (kanban, list, calendar), components/
+    finance/                        # full 4-layer module, same pattern as tasks/
+      domain/                       # types.ts, rules.ts, repository.ts (port)
+      infrastructure/                # LocalFinanceRepository (active), SupabaseFinanceRepository
+      application/                  # finance-store.ts (Zustand)
+      presentation/                 # tabs/ (overview, transactions, budgets, reports), components/
     _template/                      # copy this to start a new module
       domain/
       application/
@@ -123,6 +128,38 @@ no `auth.uid()` yet for Row Level Security to scope rows to (see
 from `domain/repository.ts`, so switching is a one-line change in
 `application/task-store.ts`, not a rewrite — see
 `src/modules/tasks/README.md`.
+
+`modules/finance` (built the same way — see its own README) repeats this
+exactly: `FinanceRepository` port, `LocalFinanceRepository` active,
+`SupabaseFinanceRepository` waiting on auth, Zustand as the application
+layer. Its dialogs (`TransactionDialog`, `BudgetDialog`) also reuse the
+Tasks module's "adjust state during render, not in an effect" pattern for
+resetting a form when *what's being edited* changes — see
+`task-detail-sheet.tsx` for the original write-up of why.
+
+## Charts (recharts)
+
+Two non-obvious things learned building the Finance module's charts,
+worth knowing before adding more:
+
+- **Pie/donut entrance animation can look like a rendering bug.**
+  recharts animates a `Pie` growing from 0° by default; a screenshot taken
+  ~1–1.5s after mount can catch it mid-sweep, which looks exactly like a
+  cropped/mis-sized chart. It isn't — it finishes on its own. Don't chase
+  this as a sizing bug; if a screenshot/test needs a settled chart, wait
+  out the animation (or set `isAnimationActive={false}` on that specific
+  `Pie`) rather than fighting the container.
+- **Prefer percentage radii over fixed pixel radii on `Pie`**
+  (`innerRadius="55%"` not `innerRadius={55}`), and give `ChartContainer`
+  explicit `h-[…] w-full` rather than `aspect-square` when the chart sits
+  in a CSS Grid column — matches what already works for
+  `RadialBarChart`/`BarChart` elsewhere in the app, and degrades gracefully
+  if a container is ever measured smaller than expected on first paint.
+- `shared/components/ui/chart.tsx`'s `ChartLegendContent` wraps
+  (`flex-wrap`) and `ChartContainer`'s `ResponsiveContainer` debounces
+  resize handling (`debounce={50}`) — both fixed for every chart in the
+  app, not just Finance's, after a legend with many entries (8 categories)
+  overflowed into a sibling card at the default no-wrap.
 
 ## Routing & i18n
 

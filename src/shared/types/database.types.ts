@@ -252,29 +252,41 @@ export interface Database {
           deleted_at: Timestamptz | null;
         }>
       >;
+      categories: TableDef<
+        {
+          id: string;
+          user_id: string;
+          name: string;
+          color: string;
+          kind: "income" | "expense" | "saving" | "investment";
+          created_at: Timestamptz;
+        },
+        { user_id: string; name: string; color?: string; kind: "income" | "expense" | "saving" | "investment" },
+        Partial<{ name: string; color: string }>
+      >;
       transactions: TableDef<
         {
           id: string;
           user_id: string;
-          type: "income" | "expense";
+          type: "income" | "expense" | "saving" | "investment";
           amount: number;
           currency: string;
-          category: string | null;
+          category_id: string | null;
           note: string | null;
           occurred_at: Timestamptz;
           created_at: Timestamptz;
           updated_at: Timestamptz;
         },
-        Partial<{ currency: string; category: string | null; note: string | null; occurred_at: Timestamptz }> & {
+        Partial<{ currency: string; category_id: string | null; note: string | null; occurred_at: Timestamptz }> & {
           user_id: string;
-          type: "income" | "expense";
+          type: "income" | "expense" | "saving" | "investment";
           amount: number;
         },
         Partial<{
-          type: "income" | "expense";
+          type: "income" | "expense" | "saving" | "investment";
           amount: number;
           currency: string;
-          category: string | null;
+          category_id: string | null;
           note: string | null;
           occurred_at: Timestamptz;
         }>
@@ -283,14 +295,14 @@ export interface Database {
         {
           id: string;
           user_id: string;
-          category: string;
+          category_id: string;
           monthly_limit: number;
           currency: string;
           created_at: Timestamptz;
           updated_at: Timestamptz;
         },
-        Partial<{ currency: string }> & { user_id: string; category: string; monthly_limit: number },
-        Partial<{ category: string; monthly_limit: number; currency: string }>
+        Partial<{ currency: string }> & { user_id: string; category_id: string; monthly_limit: number },
+        Partial<{ category_id: string; monthly_limit: number; currency: string }>
       >;
     };
     Views: Record<string, never>;

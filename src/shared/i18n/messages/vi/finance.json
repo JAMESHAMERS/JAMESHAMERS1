@@ -1,0 +1,62 @@
+{
+  "tabs": {
+    "overview": "Tổng quan",
+    "transactions": "Giao dịch",
+    "budgets": "Ngân sách",
+    "reports": "Báo cáo"
+  },
+  "type": {
+    "label": "Loại",
+    "income": "Thu nhập",
+    "expense": "Chi tiêu",
+    "saving": "Tiết kiệm",
+    "investment": "Đầu tư"
+  },
+  "category": {
+    "label": "Danh mục",
+    "placeholder": "Chọn danh mục",
+    "noCategories": "Chưa có danh mục nào",
+    "newCategory": "Danh mục mới"
+  },
+  "filters": {
+    "searchPlaceholder": "Tìm giao dịch...",
+    "type": "Loại",
+    "category": "Danh mục",
+    "clear": "Xóa bộ lọc"
+  },
+  "actions": {
+    "cancel": "Hủy",
+    "save": "Lưu",
+    "add": "Thêm",
+    "edit": "Sửa",
+    "delete": "Xóa"
+  },
+  "addTransaction": "Thêm giao dịch",
+  "editTransaction": "Sửa giao dịch",
+  "amount": "Số tiền",
+  "date": "Ngày",
+  "note": "Ghi chú",
+  "notePlaceholder": "Khoản này dùng để làm gì?",
+  "cashFlow": "Dòng tiền",
+  "cashFlowTrend": "Xu hướng dòng tiền",
+  "totalSavings": "Tổng tiết kiệm",
+  "totalInvestments": "Tổng đầu tư",
+  "expenseByCategory": "Chi tiêu theo danh mục",
+  "recentTransactions": "Giao dịch gần đây",
+  "noTransactions": "Chưa có giao dịch nào",
+  "noTransactionsHint": "Thêm khoản thu nhập, chi tiêu, tiết kiệm hoặc đầu tư đầu tiên để bắt đầu.",
+  "noData": "Không có dữ liệu cho giai đoạn này",
+  "uncategorized": "Chưa phân loại",
+  "budget": {
+    "add": "Thêm ngân sách",
+    "edit": "Sửa ngân sách",
+    "empty": "Chưa có ngân sách nào",
+    "emptyHint": "Đặt hạn mức hàng tháng cho một danh mục chi tiêu để bắt đầu theo dõi.",
+    "monthlyLimit": "Hạn mức hàng tháng",
+    "ofLimit": "trong {limit}"
+  },
+  "reportsTab": {
+    "byType": "Thu nhập, Chi tiêu, Tiết kiệm và Đầu tư",
+    "netThisMonth": "Dòng tiền ròng tháng này: {amount}"
+  }
+}

@@ -58,7 +58,12 @@ function ChartContainer({
         {...props}
       >
         <ChartStyle id={chartId} config={config} />
-        <RechartsPrimitive.ResponsiveContainer>
+        {/* A small debounce coalesces the resize events recharts sees while
+            the surrounding grid/flex layout is still settling (fonts,
+            legend text wrapping, sibling cards) into one measurement, so
+            charts don't draw once at a wrong intermediate size and then
+            snap to the right one a moment later. */}
+        <RechartsPrimitive.ResponsiveContainer debounce={50}>
           {children}
         </RechartsPrimitive.ResponsiveContainer>
       </div>
@@ -259,7 +264,7 @@ function ChartLegendContent({
   return (
     <div
       className={cn(
-        "flex items-center justify-center gap-4",
+        "flex flex-wrap items-center justify-center gap-x-4 gap-y-1",
         verticalAlign === "top" ? "pb-3" : "pt-3",
         className,
       )}

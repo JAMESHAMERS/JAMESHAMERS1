@@ -1,0 +1,62 @@
+{
+  "tabs": {
+    "overview": "Overview",
+    "transactions": "Transactions",
+    "budgets": "Budgets",
+    "reports": "Reports"
+  },
+  "type": {
+    "label": "Type",
+    "income": "Income",
+    "expense": "Expense",
+    "saving": "Saving",
+    "investment": "Investment"
+  },
+  "category": {
+    "label": "Category",
+    "placeholder": "Select category",
+    "noCategories": "No categories yet",
+    "newCategory": "New category"
+  },
+  "filters": {
+    "searchPlaceholder": "Search transactions...",
+    "type": "Type",
+    "category": "Category",
+    "clear": "Clear filters"
+  },
+  "actions": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "addTransaction": "Add transaction",
+  "editTransaction": "Edit transaction",
+  "amount": "Amount",
+  "date": "Date",
+  "note": "Note",
+  "notePlaceholder": "What was this for?",
+  "cashFlow": "Cash Flow",
+  "cashFlowTrend": "Cash Flow Trend",
+  "totalSavings": "Total Savings",
+  "totalInvestments": "Total Investments",
+  "expenseByCategory": "Expense by Category",
+  "recentTransactions": "Recent Transactions",
+  "noTransactions": "No transactions yet",
+  "noTransactionsHint": "Add your first income, expense, saving or investment entry to get started.",
+  "noData": "Nothing to show for this period",
+  "uncategorized": "Uncategorized",
+  "budget": {
+    "add": "Add budget",
+    "edit": "Edit budget",
+    "empty": "No budgets yet",
+    "emptyHint": "Set a monthly limit for an expense category to start tracking it here.",
+    "monthlyLimit": "Monthly limit",
+    "ofLimit": "of {limit}"
+  },
+  "reportsTab": {
+    "byType": "Income vs Expense vs Saving vs Investment",
+    "netThisMonth": "Net cash flow this month: {amount}"
+  }
+}
