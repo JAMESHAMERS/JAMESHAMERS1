@@ -50,5 +50,9 @@
       "title": "Khung module Mục tiêu",
       "description": "Tuyến đường, mục điều hướng và bố cục đã sẵn sàng. Tính năng theo dõi mục tiêu sẽ được xây dựng ở giai đoạn sau."
     }
+  },
+  "travel": {
+    "title": "Du lịch",
+    "description": "Lên kế hoạch chuyến đi và theo dõi lịch trình, chi phí, kỷ niệm."
   }
 }

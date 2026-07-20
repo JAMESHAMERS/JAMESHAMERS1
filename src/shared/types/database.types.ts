@@ -360,6 +360,132 @@ export interface Database {
         },
         Partial<{ calories: number; protein_g: number; carbs_g: number; fat_g: number; water_ml: number }>
       >;
+      trips: TableDef<
+        {
+          id: string;
+          user_id: string;
+          name: string;
+          destination: string;
+          start_date: DateString;
+          end_date: DateString;
+          cover_color: string;
+          budget: number;
+          currency: string;
+          notes: string;
+          created_at: Timestamptz;
+          updated_at: Timestamptz;
+        },
+        Partial<{ cover_color: string; budget: number; currency: string; notes: string }> & {
+          user_id: string;
+          name: string;
+          destination: string;
+          start_date: DateString;
+          end_date: DateString;
+        },
+        Partial<{
+          name: string;
+          destination: string;
+          start_date: DateString;
+          end_date: DateString;
+          cover_color: string;
+          budget: number;
+          currency: string;
+          notes: string;
+        }>
+      >;
+      trip_itinerary_items: TableDef<
+        {
+          id: string;
+          trip_id: string;
+          user_id: string;
+          category: "flight" | "hotel" | "activity" | "food" | "transport" | "other";
+          title: string;
+          location: string;
+          lat: number | null;
+          lng: number | null;
+          start_at: Timestamptz;
+          end_at: Timestamptz | null;
+          notes: string;
+          created_at: Timestamptz;
+          updated_at: Timestamptz;
+        },
+        Partial<{ location: string; lat: number | null; lng: number | null; end_at: Timestamptz | null; notes: string }> & {
+          trip_id: string;
+          user_id: string;
+          category: "flight" | "hotel" | "activity" | "food" | "transport" | "other";
+          title: string;
+          start_at: Timestamptz;
+        },
+        Partial<{
+          category: "flight" | "hotel" | "activity" | "food" | "transport" | "other";
+          title: string;
+          location: string;
+          lat: number | null;
+          lng: number | null;
+          start_at: Timestamptz;
+          end_at: Timestamptz | null;
+          notes: string;
+        }>
+      >;
+      trip_expenses: TableDef<
+        {
+          id: string;
+          trip_id: string;
+          user_id: string;
+          category: "transport" | "accommodation" | "food" | "activities" | "shopping" | "other";
+          amount: number;
+          currency: string;
+          note: string;
+          spent_at: Timestamptz;
+          created_at: Timestamptz;
+          updated_at: Timestamptz;
+        },
+        Partial<{ currency: string; note: string; spent_at: Timestamptz }> & {
+          trip_id: string;
+          user_id: string;
+          category: "transport" | "accommodation" | "food" | "activities" | "shopping" | "other";
+          amount: number;
+        },
+        Partial<{
+          category: "transport" | "accommodation" | "food" | "activities" | "shopping" | "other";
+          amount: number;
+          currency: string;
+          note: string;
+          spent_at: Timestamptz;
+        }>
+      >;
+      trip_photos: TableDef<
+        {
+          id: string;
+          trip_id: string;
+          user_id: string;
+          storage_path: string;
+          caption: string;
+          lat: number | null;
+          lng: number | null;
+          taken_at: Timestamptz;
+          created_at: Timestamptz;
+        },
+        Partial<{ caption: string; lat: number | null; lng: number | null; taken_at: Timestamptz }> & {
+          trip_id: string;
+          user_id: string;
+          storage_path: string;
+        },
+        Partial<{ caption: string; lat: number | null; lng: number | null; taken_at: Timestamptz }>
+      >;
+      trip_notes: TableDef<
+        {
+          id: string;
+          trip_id: string;
+          user_id: string;
+          title: string;
+          body: string;
+          created_at: Timestamptz;
+          updated_at: Timestamptz;
+        },
+        Partial<{ title: string; body: string }> & { trip_id: string; user_id: string },
+        Partial<{ title: string; body: string }>
+      >;
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;

@@ -50,5 +50,9 @@
       "title": "Goals module scaffold",
       "description": "The route, navigation entry, and layout are ready. Goal tracking will be built on top of this in a later phase."
     }
+  },
+  "travel": {
+    "title": "Travel",
+    "description": "Plan trips and track itineraries, expenses, and memories."
   }
 }

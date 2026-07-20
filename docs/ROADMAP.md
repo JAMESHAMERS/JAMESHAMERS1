@@ -117,6 +117,38 @@ as `modules/finance`: full 4 layers, `LocalMealsRepository` active today,
 - [x] First use of `ReferenceLine` (recharts) in this codebase — the
   dashed goal line on the Weekly tab's calorie and water bar charts.
 
+## Phase 8 — Travel ✅
+
+Built out of order (before Habits/Goals/Journal) for the same reason
+Tasks, Finance, and Meals jumped the queue — it was requested next. Same
+pattern as `modules/finance`: full 4 layers, `LocalTravelRepository`
+active today, `SupabaseTravelRepository` written and waiting on Phase 1
+auth.
+
+- [x] `domain` — `Trip` (name/destination/date range/budget/cover color),
+  `ItineraryItem` (flight/hotel/activity/food/transport/other, optional
+  coordinates), `TripExpense` (transport/accommodation/food/activities/
+  shopping/other), `TripPhoto`, `TripNote`; pure rules (derived trip
+  status, budget progress, category breakdowns, day-grouping, a merged
+  itinerary+expense+photo+note timeline feed, global stats/spend trend).
+- [x] `infrastructure` — `LocalTravelRepository` seeded with 3 trips (one
+  completed, one ongoing, one upcoming), cascade-deleting a trip's
+  itinerary/expenses/photos/notes; `SupabaseTravelRepository` (not wired
+  in).
+- [x] `application` — Zustand store (`travel-store.ts`), including which
+  trip's detail sheet is open and which of its 6 sub-tabs is active.
+- [x] `presentation` — top tabs Trips (card grid) and Statistics
+  (spend-by-category donut, spend trend, trip/day/destination counts);
+  clicking a trip card opens `TripDetailSheet`, a `Sheet` with its own
+  nested tabs for Itinerary, Expenses, Photos, Map (custom SVG pin
+  visualization, no external tile provider), Notes, and Timeline.
+- [x] New schema (`0011_travel.sql`): `trips`, `trip_itinerary_items`,
+  `trip_expenses`, `trip_photos`, `trip_notes` tables, all with RLS and
+  `on delete cascade` from `trips`.
+- [x] First module to nest a second `Tabs` instance inside a `Sheet`
+  (Tasks' detail sheet is one long scroll; Travel's has too much content
+  per trip for that to work).
+
 ## Ongoing / cross-cutting (pick up as needed, not a phase)
 
 - Automated tests: unit tests for each module's `domain` layer as it's

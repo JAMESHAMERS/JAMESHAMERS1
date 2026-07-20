@@ -7,6 +7,7 @@ import {
   WalletIcon,
   NotebookTextIcon,
   TargetIcon,
+  PlaneIcon,
   SettingsIcon,
 } from "lucide-react";
 
@@ -31,6 +32,7 @@ export const mainNav: NavItem[] = [
   { href: "/finance", labelKey: "finance", icon: WalletIcon },
   { href: "/journal", labelKey: "journal", icon: NotebookTextIcon },
   { href: "/goals", labelKey: "goals", icon: TargetIcon },
+  { href: "/travel", labelKey: "travel", icon: PlaneIcon },
 ];
 
 export const footerNav: NavItem[] = [

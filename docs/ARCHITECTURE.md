@@ -67,6 +67,13 @@ src/
       infrastructure/                # LocalMealsRepository (active), SupabaseMealsRepository
       application/                  # meals-store.ts (Zustand)
       presentation/                 # tabs/ (today, weekly), components/
+    travel/                         # full 4-layer module, same pattern as tasks/ and finance/
+      domain/                       # types.ts, rules.ts, repository.ts (port)
+      infrastructure/                # LocalTravelRepository (active), SupabaseTravelRepository
+      application/                  # travel-store.ts (Zustand)
+      presentation/                 # tabs/ (trips, statistics), detail-tabs/ (itinerary,
+                                     # expenses, photos, map, notes, timeline — inside the
+                                     # per-trip Sheet), components/
     _template/                      # copy this to start a new module
       domain/
       application/
@@ -154,6 +161,26 @@ rather than importing `shared/lib/date-grid.ts`, the same call Finance
 made for month-key math — each module's date arithmetic is small enough
 that a shared abstraction would cost more than it saves.
 
+`modules/travel` repeats the same shape a fourth time (`TravelRepository`
+port, `LocalTravelRepository` active with cascading delete,
+`SupabaseTravelRepository` waiting on auth) but is the first module to
+combine two different "detail" UI patterns at once: a Finance-style
+top-level `Tabs` switcher (Trips / Statistics) *and* a Tasks-style
+`Sheet`-based detail view (`TripDetailSheet`) for a single trip — except
+that Sheet itself has a second, nested `Tabs` for its six sub-features
+(Itinerary, Expenses, Photos, Map, Notes, Timeline), since that's too much
+content for one long scrolling column like `task-detail-sheet.tsx`. A
+trip's `TripStatus` (upcoming/ongoing/completed) is deliberately *derived*
+in `domain/rules.ts#tripStatus` by comparing today's date against the
+trip's date range, not stored as a column — a stored status would drift
+out of sync the moment a trip's dates pass without anyone opening the app.
+Its Map tab (`TripMap`) is a custom SVG pin visualization projected into
+the bounding box of the trip's own coordinates rather than an embedded
+tile provider, since there's no map API key/network dependency to lean on
+— see `modules/travel/README.md` for why, and for the same
+`URL.createObjectURL` trade-off Tasks' attachments already made, reused
+here for trip photos.
+
 ## Charts (recharts)
 
 Two non-obvious things learned building the Finance module's charts,
@@ -229,7 +256,7 @@ worth knowing before adding more:
 ## What this foundation deliberately does not include
 
 No auth flow, no tests, and — outside of `modules/tasks`, `modules/finance`,
-and `modules/meals` — no module has real CRUD yet (`habits`/`journal`/`goals`
-are still route placeholders). All three real modules run on local-only
-persistence rather than Supabase for the reason explained above. See
-`docs/ROADMAP.md` for what's next.
+`modules/meals`, and `modules/travel` — no module has real CRUD yet
+(`habits`/`journal`/`goals` are still route placeholders). All four real
+modules run on local-only persistence rather than Supabase for the reason
+explained above. See `docs/ROADMAP.md` for what's next.
