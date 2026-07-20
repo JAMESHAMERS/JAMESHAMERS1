@@ -176,6 +176,40 @@ extended with tags/photos/voice notes rather than replaced.
   in-browser audio recording (`VoiceNoteRecorder`), with mic
   permission/device failures caught and shown inline.
 
+## Phase 10 — Analytics ✅
+
+Built out of order (before Habits/Goals) for the same reason every
+module since Tasks jumped the queue — it was requested next, and unlike
+every phase above, it depends on the other modules existing first: there
+would be nothing to chart otherwise. Not a `domain/application/
+infrastructure/presentation` module in the usual sense — it owns no
+data, no migration, and no Supabase adapter. See "Cross-module reads
+(Analytics)" in `docs/ARCHITECTURE.md` and `src/modules/analytics/
+README.md` for the deliberate, scoped exception that lets it read real
+data from five sibling modules' `domain`/`infrastructure` layers (never
+their `application` stores or `presentation` components).
+
+- [x] `domain/rules.ts` — the one genuinely new aggregation logic
+  (Tasks status/priority breakdown, weekly completion trend,
+  productivity stats); every other tab calls its source module's own
+  pure `domain/rules.ts` functions directly instead of re-deriving them.
+- [x] `infrastructure/read-sources.ts` — constructs
+  `LocalTaskRepository`/`LocalFinanceRepository`/`LocalMealsRepository`/
+  `LocalTravelRepository`/`LocalJournalRepository` and reads a
+  point-in-time snapshot, independent of whether those modules' own
+  stores have ever been hydrated this session.
+- [x] `application` — Zustand store (`analytics-store.ts`) with only a
+  `hydrate()`, no create/update/delete — Analytics never mutates another
+  module's data.
+- [x] `presentation` — seven tabs (Productivity, Finance, Habits, Goals,
+  Meals, Mood, Travel), each a handful of `StatCard`s plus 1–3 charts
+  built on two new shared primitives, `TrendChart` (bar/line, optional
+  goal `ReferenceLine`) and `DonutChart` (categorical share-of-total) —
+  covering every chart shape all seven tabs need. Habits and Goals show
+  an honest `EmptyState` (those modules have no real data yet) rather
+  than fabricated numbers.
+- [x] No new schema — nothing here to persist.
+
 ## Ongoing / cross-cutting (pick up as needed, not a phase)
 
 - Automated tests: unit tests for each module's `domain` layer as it's

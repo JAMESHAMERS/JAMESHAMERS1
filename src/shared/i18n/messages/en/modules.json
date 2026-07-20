@@ -50,5 +50,9 @@
   "travel": {
     "title": "Travel",
     "description": "Plan trips and track itineraries, expenses, and memories."
+  },
+  "analytics": {
+    "title": "Analytics",
+    "description": "Interactive dashboards across productivity, finance, meals, mood, and travel."
   }
 }

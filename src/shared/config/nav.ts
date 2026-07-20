@@ -8,6 +8,7 @@ import {
   NotebookTextIcon,
   TargetIcon,
   PlaneIcon,
+  ChartNoAxesCombinedIcon,
   SettingsIcon,
 } from "lucide-react";
 
@@ -33,6 +34,7 @@ export const mainNav: NavItem[] = [
   { href: "/journal", labelKey: "journal", icon: NotebookTextIcon },
   { href: "/goals", labelKey: "goals", icon: TargetIcon },
   { href: "/travel", labelKey: "travel", icon: PlaneIcon },
+  { href: "/analytics", labelKey: "analytics", icon: ChartNoAxesCombinedIcon },
 ];
 
 export const footerNav: NavItem[] = [

@@ -22,7 +22,10 @@ what comes after this foundation phase.
    Supabase adapter) be replaced without touching business logic.
 4. **Shared vs. module-owned.** If more than one module would need to
    import something from a sibling module, it belongs in `src/shared`
-   instead. Modules should never import from each other directly.
+   instead. Modules should never import from each other directly. The one
+   documented exception is `modules/analytics`, a cross-cutting reporting
+   module with no data of its own — see "Cross-module reads (Analytics)"
+   below for the narrow, scoped shape that exception takes.
 
 ## Folder structure
 
@@ -41,8 +44,11 @@ src/
         tasks/page.tsx
         habits/page.tsx
         finance/page.tsx
+        meals/page.tsx
+        travel/page.tsx
         journal/page.tsx
         goals/page.tsx
+        analytics/page.tsx
         settings/page.tsx
     not-found.tsx                   # fallback for paths outside [locale]
     globals.css                     # design tokens (see DESIGN_SYSTEM.md)
@@ -79,6 +85,16 @@ src/
       infrastructure/                # LocalJournalRepository (active), SupabaseJournalRepository
       application/                  # journal-store.ts (Zustand)
       presentation/                 # tabs/ (timeline, mood), components/
+    analytics/                      # cross-cutting reporting module — no data of its own,
+                                     # see "Cross-module reads (Analytics)" below
+      domain/                       # types.ts (AnalyticsTab), rules.ts (Productivity-only —
+                                     # everything else reuses sibling modules' own rules)
+      infrastructure/                # read-sources.ts — constructs each sibling module's
+                                     # own Local<X>Repository, read-only
+      application/                  # analytics-store.ts (Zustand, hydrate() only — no writes)
+      presentation/                 # tabs/ (productivity, finance, habits, goals, meals,
+                                     # mood, travel), components/ (TrendChart, DonutChart —
+                                     # generic, shared by every tab)
     _template/                      # copy this to start a new module
       domain/
       application/
@@ -206,6 +222,39 @@ for itinerary/expense/tag variety elsewhere — mood *is* a meaningful
 positive/negative signal, the same reasoning Finance applied to
 income/expense.
 
+## Cross-module reads (Analytics)
+
+`modules/analytics` breaks Principle 4 on purpose, and only it does.
+Every other module runs fully isolated — Tasks has no idea Finance
+exists — but a dashboard module that shows "Productivity, Finance,
+Meals, Mood, Travel" *needs* those five modules' data to be anything
+more than decoration. The alternative (mock numbers, like `overview`'s
+current placeholder widgets) was considered and rejected: a dashboard
+that doesn't reflect what's actually in your Tasks/Finance/Meals/Travel/
+Journal data isn't useful, it's just decoration with charts. See
+`src/modules/analytics/README.md` for the full reasoning; the short
+version is a narrow, two-part carve-out:
+
+- **In bounds:** a sibling module's `domain` (types + pure `rules.ts`
+  functions — no side effects) and its `infrastructure`'s
+  `Local<X>Repository` classes, read-only. `analytics-store.ts`
+  constructs all five directly in its own `hydrate()`
+  (`infrastructure/read-sources.ts`) rather than depending on those
+  modules' own Zustand stores being hydrated, so Analytics shows real
+  data even for a user who's never opened /tasks or /finance this
+  session.
+- **Out of bounds, same as ever:** a sibling module's `application`
+  (its store) or `presentation` (its components). Analytics rebuilds its
+  own small `analytics-meta.ts` for status/priority/mood/category colors
+  instead of importing each module's own — a little color-constant
+  duplication, the same trade-off every module's category colors already
+  accept over a shared lookup table (Principle 4's own reasoning, applied
+  to Analytics itself).
+
+If a second module ever needed this same read access, that's the signal
+to extract a real shared read layer instead of repeating the exception a
+second time.
+
 ## Charts (recharts)
 
 Two non-obvious things learned building the Finance module's charts,
@@ -284,4 +333,7 @@ No auth flow, no tests, and — outside of `modules/tasks`, `modules/finance`,
 `modules/meals`, `modules/travel`, and `modules/journal` — no module has
 real CRUD yet (`habits`/`goals` are still route placeholders). All five
 real modules run on local-only persistence rather than Supabase for the
-reason explained above. See `docs/ROADMAP.md` for what's next.
+reason explained above. `modules/analytics` reads all five (see
+"Cross-module reads" above) but owns no data itself, so its Habits and
+Goals tabs are honest empty states rather than fabricated charts. See
+`docs/ROADMAP.md` for what's next.

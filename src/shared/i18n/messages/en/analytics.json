@@ -1,0 +1,58 @@
+{
+  "tabs": {
+    "productivity": "Productivity",
+    "finance": "Finance",
+    "habits": "Habits",
+    "goals": "Goals",
+    "meals": "Meals",
+    "mood": "Mood",
+    "travel": "Travel"
+  },
+  "productivity": {
+    "totalTasks": "Total tasks",
+    "completed": "Completed",
+    "completionRate": "Completion rate",
+    "overdue": "Overdue",
+    "weeklyCompletions": "Tasks completed per week",
+    "byStatus": "By status",
+    "byPriority": "By priority",
+    "noData": "Nothing to show yet"
+  },
+  "finance": {
+    "net": "Net cash flow",
+    "savingsRate": "Savings rate",
+    "cashFlowTrend": "Cash flow trend"
+  },
+  "meals": {
+    "avgCalories": "Avg. daily calories",
+    "avgWater": "Avg. daily water",
+    "calorieTrend": "Calorie trend vs. goal",
+    "macroSplit": "Avg. macro split"
+  },
+  "mood": {
+    "streak": "Journaling streak",
+    "days": "{count} days",
+    "averageMood": "Average mood",
+    "totalEntries": "Total entries",
+    "moodTrend": "Mood trend (30 days)",
+    "moodDistribution": "Mood distribution"
+  },
+  "travel": {
+    "totalTrips": "Total trips",
+    "totalDays": "Days traveled",
+    "destinations": "Destinations",
+    "totalSpend": "Total spend",
+    "spendTrend": "Spend trend",
+    "tripStatus": "Trips by status",
+    "spendByCategory": "Spend by category",
+    "noData": "Nothing to show yet"
+  },
+  "habits": {
+    "title": "Habits analytics aren't available yet",
+    "description": "The Habits module hasn't shipped real tracking yet, so there's nothing to chart here. Once it does, this dashboard will show streaks, completion rates, and trends."
+  },
+  "goals": {
+    "title": "Goals analytics aren't available yet",
+    "description": "The Goals module hasn't shipped real tracking yet, so there's nothing to chart here. Once it does, this dashboard will show progress and completion trends."
+  }
+}
