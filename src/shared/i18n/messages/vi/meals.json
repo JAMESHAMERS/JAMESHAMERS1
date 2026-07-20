@@ -1,0 +1,46 @@
+{
+  "tabs": {
+    "today": "Hôm nay",
+    "weekly": "Theo tuần"
+  },
+  "type": {
+    "label": "Bữa ăn",
+    "breakfast": "Bữa sáng",
+    "lunch": "Bữa trưa",
+    "dinner": "Bữa tối",
+    "snack": "Ăn vặt"
+  },
+  "actions": {
+    "cancel": "Hủy",
+    "save": "Lưu",
+    "add": "Thêm",
+    "edit": "Sửa",
+    "delete": "Xóa"
+  },
+  "addEntry": "Thêm món ăn",
+  "editEntry": "Sửa món ăn",
+  "noEntries": "Chưa có món nào",
+  "noData": "Không có dữ liệu cho giai đoạn này",
+  "name": "Tên món",
+  "namePlaceholder": "Bạn đã ăn gì?",
+  "calories": "Calo",
+  "caloriesShort": "{count} kcal",
+  "caloriesRemaining": "Còn lại {count} kcal",
+  "caloriesOver": "Vượt {count} kcal",
+  "time": "Giờ",
+  "nutrition": "Dinh dưỡng",
+  "protein": "Đạm",
+  "carbs": "Tinh bột",
+  "fat": "Chất béo",
+  "macroSummary": "Đạm {protein}g · Tinh bột {carbs}g · Béo {fat}g",
+  "water": "Nước uống",
+  "today": "Hôm nay",
+  "avgCalories": "TB calo",
+  "avgProtein": "TB đạm",
+  "avgCarbs": "TB tinh bột",
+  "avgFat": "TB chất béo",
+  "avgWater": "TB nước",
+  "caloriesTrend": "Calo so với mục tiêu",
+  "macroSplit": "Tỷ lệ dinh dưỡng",
+  "waterTrend": "Lượng nước so với mục tiêu"
+}

@@ -1,0 +1,58 @@
+{
+  "tabs": {
+    "productivity": "Năng suất",
+    "finance": "Tài chính",
+    "habits": "Thói quen",
+    "goals": "Mục tiêu",
+    "meals": "Bữa ăn",
+    "mood": "Cảm xúc",
+    "travel": "Du lịch"
+  },
+  "productivity": {
+    "totalTasks": "Tổng công việc",
+    "completed": "Đã hoàn thành",
+    "completionRate": "Tỷ lệ hoàn thành",
+    "overdue": "Quá hạn",
+    "weeklyCompletions": "Công việc hoàn thành mỗi tuần",
+    "byStatus": "Theo trạng thái",
+    "byPriority": "Theo mức ưu tiên",
+    "noData": "Chưa có dữ liệu"
+  },
+  "finance": {
+    "net": "Dòng tiền ròng",
+    "savingsRate": "Tỷ lệ tiết kiệm",
+    "cashFlowTrend": "Xu hướng dòng tiền"
+  },
+  "meals": {
+    "avgCalories": "TB calo hằng ngày",
+    "avgWater": "TB nước hằng ngày",
+    "calorieTrend": "Xu hướng calo so với mục tiêu",
+    "macroSplit": "TB tỷ lệ dinh dưỡng"
+  },
+  "mood": {
+    "streak": "Chuỗi ngày viết nhật ký",
+    "days": "{count} ngày",
+    "averageMood": "Cảm xúc trung bình",
+    "totalEntries": "Tổng số mục",
+    "moodTrend": "Xu hướng cảm xúc (30 ngày)",
+    "moodDistribution": "Phân bố cảm xúc"
+  },
+  "travel": {
+    "totalTrips": "Tổng chuyến đi",
+    "totalDays": "Số ngày đã đi",
+    "destinations": "Điểm đến",
+    "totalSpend": "Tổng chi tiêu",
+    "spendTrend": "Xu hướng chi tiêu",
+    "tripStatus": "Chuyến đi theo trạng thái",
+    "spendByCategory": "Chi tiêu theo danh mục",
+    "noData": "Chưa có dữ liệu"
+  },
+  "habits": {
+    "title": "Chưa có dữ liệu phân tích Thói quen",
+    "description": "Module Thói quen chưa triển khai tính năng theo dõi thực tế nên chưa có gì để hiển thị. Khi hoàn thiện, bảng điều khiển này sẽ hiển thị chuỗi ngày, tỷ lệ hoàn thành và xu hướng."
+  },
+  "goals": {
+    "title": "Chưa có dữ liệu phân tích Mục tiêu",
+    "description": "Module Mục tiêu chưa triển khai tính năng theo dõi thực tế nên chưa có gì để hiển thị. Khi hoàn thiện, bảng điều khiển này sẽ hiển thị tiến độ và xu hướng hoàn thành."
+  }
+}

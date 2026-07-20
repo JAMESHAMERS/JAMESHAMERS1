@@ -1,0 +1,79 @@
+{
+  "greeting": {
+    "morning": "Chào buổi sáng",
+    "afternoon": "Chào buổi chiều",
+    "evening": "Chào buổi tối"
+  },
+  "welcome": {
+    "subtitle": "Đây là những gì đang diễn ra trong ngày của bạn.",
+    "streak": "Chuỗi {days} ngày"
+  },
+  "widgets": {
+    "todayTasks": {
+      "title": "Công việc hôm nay",
+      "viewAll": "Xem tất cả",
+      "empty": "Hôm nay bạn không có việc gì",
+      "completed": "{done}/{total} hoàn thành",
+      "priority": {
+        "low": "Thấp",
+        "medium": "Trung bình",
+        "high": "Cao"
+      }
+    },
+    "calendar": {
+      "title": "Lịch"
+    },
+    "finance": {
+      "title": "Tổng quan tài chính",
+      "income": "Thu nhập",
+      "expense": "Chi tiêu",
+      "balance": "Số dư",
+      "viewAll": "Xem chi tiết"
+    },
+    "goals": {
+      "title": "Tiến độ mục tiêu",
+      "viewAll": "Xem tất cả"
+    },
+    "activity": {
+      "title": "Hoạt động gần đây"
+    },
+    "quickActions": {
+      "title": "Thao tác nhanh",
+      "addTask": "Thêm công việc",
+      "addHabit": "Ghi nhận thói quen",
+      "addTransaction": "Thêm chi tiêu",
+      "addJournal": "Viết nhật ký"
+    },
+    "productivity": {
+      "title": "Điểm hiệu suất",
+      "subtitle": "7 ngày qua",
+      "tasksDone": "{done}/{total} công việc",
+      "streak": "Chuỗi {days} ngày"
+    }
+  },
+  "demo": {
+    "tasks": {
+      "standup": "Họp đầu ngày",
+      "reviewPr": "Duyệt pull request #482",
+      "designSync": "Họp đồng bộ thiết kế",
+      "gymSession": "Tập gym buổi tối",
+      "readChapter": "Đọc chương 4"
+    },
+    "goals": {
+      "readBooks": "Đọc 12 cuốn sách trong năm",
+      "emergencyFund": "Xây dựng quỹ dự phòng",
+      "runMarathon": "Chạy bán marathon"
+    },
+    "categories": {
+      "personal": "Cá nhân",
+      "finance": "Tài chính",
+      "health": "Sức khỏe"
+    },
+    "activity": {
+      "completedTask": "Đã hoàn thành \"{title}\"",
+      "addedExpense": "Đã thêm khoản chi {amount}",
+      "loggedHabit": "Đã ghi nhận thói quen \"{title}\"",
+      "wroteEntry": "Đã viết một mục nhật ký"
+    }
+  }
+}

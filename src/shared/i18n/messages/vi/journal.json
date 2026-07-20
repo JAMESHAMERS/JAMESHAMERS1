@@ -1,0 +1,54 @@
+{
+  "tabs": {
+    "timeline": "Dòng thời gian",
+    "mood": "Cảm xúc"
+  },
+  "mood": {
+    "label": "Cảm xúc",
+    "great": "Tuyệt vời",
+    "good": "Tốt",
+    "okay": "Bình thường",
+    "bad": "Không tốt",
+    "awful": "Tệ",
+    "noEntry": "Chưa ghi chú",
+    "noData": "Chưa có dữ liệu"
+  },
+  "detail": {
+    "untitled": "Ghi chú chưa có tiêu đề",
+    "editDescription": "Chỉnh sửa mục nhật ký này.",
+    "titlePlaceholder": "Đặt tiêu đề...",
+    "mood": "Cảm xúc",
+    "contentPlaceholder": "Hôm nay bạn nghĩ gì?",
+    "confirmDelete": "Xóa mục này?",
+    "delete": "Xóa",
+    "cancel": "Hủy"
+  },
+  "actions": {
+    "delete": "Xóa"
+  },
+  "stats": {
+    "streak": "Chuỗi ngày viết nhật ký",
+    "days": "{count} ngày",
+    "averageMood": "Cảm xúc trung bình",
+    "totalEntries": "Tổng số mục"
+  },
+  "newEntry": "Mục mới",
+  "untitledEntry": "Mục chưa có tiêu đề",
+  "noEntries": "Chưa có mục nhật ký nào",
+  "noEntriesHint": "Viết mục đầu tiên để bắt đầu nhật ký của bạn.",
+  "noMatches": "Không có mục nào khớp với bộ lọc",
+  "noMatchesHint": "Thử từ khóa khác hoặc xóa bộ lọc.",
+  "searchPlaceholder": "Tìm mục nhật ký...",
+  "tags": "Thẻ",
+  "noTags": "Chưa có thẻ nào",
+  "newTag": "Thẻ mới",
+  "clearFilters": "Xóa bộ lọc",
+  "photos": "Ảnh",
+  "addPhoto": "Thêm ảnh",
+  "voiceNotes": "Ghi âm",
+  "recordVoiceNote": "Ghi âm giọng nói",
+  "stopRecording": "Dừng",
+  "micUnavailable": "Không thể truy cập micro. Kiểm tra quyền truy cập trình duyệt và thử lại.",
+  "moodTrend": "Xu hướng cảm xúc",
+  "moodDistribution": "Phân bố cảm xúc"
+}

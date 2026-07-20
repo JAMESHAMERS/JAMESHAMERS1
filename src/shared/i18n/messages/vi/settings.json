@@ -1,0 +1,12 @@
+{
+  "title": "Cài đặt",
+  "description": "Quản lý giao diện và ngôn ngữ của LifeOS.",
+  "appearance": {
+    "title": "Giao diện",
+    "description": "Chọn cách LifeOS hiển thị trên thiết bị này."
+  },
+  "language": {
+    "title": "Ngôn ngữ",
+    "description": "Chọn ngôn ngữ sử dụng trong LifeOS."
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "views": {
+    "kanban": "Kanban",
+    "list": "List",
+    "calendar": "Calendar"
+  },
+  "actions": {
+    "newTask": "New task",
+    "addTask": "Add task",
+    "cancel": "Cancel"
+  },
+  "filters": {
+    "searchPlaceholder": "Search tasks...",
+    "priority": "Priority",
+    "labels": "Labels",
+    "clear": "Clear filters"
+  },
+  "status": {
+    "todo": "To do",
+    "in_progress": "In progress",
+    "in_review": "In review",
+    "done": "Done"
+  },
+  "priority": {
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "urgent": "Urgent"
+  },
+  "card": {
+    "overdue": "Overdue"
+  },
+  "kanban": {
+    "emptyColumn": "Drop a task here"
+  },
+  "list": {
+    "empty": "No tasks match your filters",
+    "sort": {
+      "manual": "Manual order",
+      "priority": "Sort by priority",
+      "dueDate": "Sort by due date",
+      "created": "Sort by created"
+    }
+  },
+  "calendar": {
+    "today": "Today",
+    "more": "+{count} more",
+    "noDueDate": "No due date"
+  },
+  "create": {
+    "title": "New task",
+    "namePlaceholder": "Task name",
+    "submit": "Create task"
+  },
+  "detail": {
+    "untitled": "Untitled task",
+    "editDescription": "View and edit task details, subtasks, labels, comments, and attachments.",
+    "descriptionPlaceholder": "Add a description...",
+    "dueDate": "Due date",
+    "noDueDate": "Set due date",
+    "reminder": "Reminder",
+    "labels": "Labels",
+    "noLabels": "No labels yet",
+    "newLabel": "New label",
+    "subtasks": "Subtasks",
+    "addSubtask": "Add a subtask",
+    "attachments": "Attachments",
+    "addAttachment": "Attach a file",
+    "comments": "Comments",
+    "addComment": "Write a comment...",
+    "confirmDelete": "Delete this task?",
+    "delete": "Delete",
+    "cancel": "Cancel"
+  }
+}

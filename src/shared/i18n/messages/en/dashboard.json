@@ -1,0 +1,79 @@
+{
+  "greeting": {
+    "morning": "Good morning",
+    "afternoon": "Good afternoon",
+    "evening": "Good evening"
+  },
+  "welcome": {
+    "subtitle": "Here's what's happening across your day.",
+    "streak": "{days}-day streak"
+  },
+  "widgets": {
+    "todayTasks": {
+      "title": "Today's Tasks",
+      "viewAll": "View all",
+      "empty": "Nothing on your plate today",
+      "completed": "{done}/{total} done",
+      "priority": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      }
+    },
+    "calendar": {
+      "title": "Calendar"
+    },
+    "finance": {
+      "title": "Finance Summary",
+      "income": "Income",
+      "expense": "Expense",
+      "balance": "Balance",
+      "viewAll": "View details"
+    },
+    "goals": {
+      "title": "Goal Progress",
+      "viewAll": "View all"
+    },
+    "activity": {
+      "title": "Recent Activity"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "addTask": "Add task",
+      "addHabit": "Log habit",
+      "addTransaction": "Add expense",
+      "addJournal": "Write entry"
+    },
+    "productivity": {
+      "title": "Productivity Score",
+      "subtitle": "Last 7 days",
+      "tasksDone": "{done} of {total} tasks",
+      "streak": "{days} day streak"
+    }
+  },
+  "demo": {
+    "tasks": {
+      "standup": "Daily standup",
+      "reviewPr": "Review pull request #482",
+      "designSync": "Design sync with team",
+      "gymSession": "Evening gym session",
+      "readChapter": "Read chapter 4"
+    },
+    "goals": {
+      "readBooks": "Read 12 books this year",
+      "emergencyFund": "Build emergency fund",
+      "runMarathon": "Run a half marathon"
+    },
+    "categories": {
+      "personal": "Personal",
+      "finance": "Finance",
+      "health": "Health"
+    },
+    "activity": {
+      "completedTask": "Completed \"{title}\"",
+      "addedExpense": "Added an expense of {amount}",
+      "loggedHabit": "Logged habit \"{title}\"",
+      "wroteEntry": "Wrote a journal entry"
+    }
+  }
+}

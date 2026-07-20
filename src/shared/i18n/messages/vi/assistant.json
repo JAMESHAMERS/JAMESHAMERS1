@@ -1,0 +1,50 @@
+{
+  "inputPlaceholder": "Hỏi về công việc, chi tiêu, tâm trạng, bữa ăn hoặc chuyến đi của bạn...",
+  "send": "Gửi",
+  "thinking": "Đang suy nghĩ...",
+  "emptyTitle": "Tôi có thể giúp gì?",
+  "emptyDescription": "Hãy hỏi tôi bất cứ điều gì về ngày của bạn — tôi sẽ lấy dữ liệu thực từ LifeOS để trả lời.",
+  "suggestions": {
+    "today": "Hôm nay tôi nên làm gì?",
+    "spending": "Tháng này tôi đã chi bao nhiêu tiền?",
+    "goals": "Mục tiêu nào đang bị chậm tiến độ?",
+    "mood": "Tâm trạng của tôi gần đây thế nào?"
+  },
+  "poweredBy": {
+    "api": "Trả lời bởi Claude",
+    "local": "Trả lời cục bộ — máy chủ chưa cấu hình khóa AI"
+  },
+  "tools": {
+    "get_tasks_today": "Công việc",
+    "get_finance_month_summary": "Tài chính",
+    "get_goals_status": "Mục tiêu",
+    "get_journal_mood": "Nhật ký",
+    "get_meals_today": "Bữa ăn",
+    "get_travel_upcoming": "Du lịch"
+  },
+  "local": {
+    "tasksToday": {
+      "none": "Bạn không có công việc nào đến hạn hôm nay hoặc quá hạn — không có gì gấp cả.",
+      "some": "Bạn có {dueTodayCount} công việc đến hạn hôm nay và {overdueCount} công việc quá hạn. Ưu tiên hàng đầu: \"{topTitle}\"."
+    },
+    "finance": {
+      "withCategory": "Tháng này bạn đã chi {expense}, chủ yếu cho {categoryName} ({categoryTotal}).",
+      "noExpenses": "Chưa có khoản chi nào được ghi trong tháng này. Thu nhập đến nay: {income}."
+    },
+    "goals": {
+      "unavailable": "LifeOS chưa xây dựng tính năng theo dõi mục tiêu, nên tôi chưa thể cho bạn biết mục tiêu nào đang chậm tiến độ — hãy quay lại khi module Mục tiêu ra mắt."
+    },
+    "mood": {
+      "none": "Chưa có ghi chú tâm trạng nào trong hai tuần qua — hãy viết nhật ký để tôi có thể theo dõi cho bạn.",
+      "some": "Bạn đang có chuỗi {streak} ngày viết nhật ký liên tục, tâm trạng trung bình {averageMoodScore}/5 trong hai tuần qua."
+    },
+    "meals": {
+      "summary": "Hôm nay bạn đã ghi nhận {calories}/{calorieGoal} kcal và {waterMl}/{waterGoalMl} ml nước."
+    },
+    "travel": {
+      "ongoing": "Bạn đang trong chuyến đi đến {name}, còn {daysRemaining} ngày nữa.",
+      "upcoming": "Chuyến đi tiếp theo của bạn, {name}, bắt đầu sau {daysUntil} ngày nữa.",
+      "none": "Không có chuyến đi nào sắp tới hoặc đang diễn ra."
+    }
+  }
+}

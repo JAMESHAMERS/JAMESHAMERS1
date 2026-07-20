@@ -1,0 +1,54 @@
+{
+  "tabs": {
+    "timeline": "Timeline",
+    "mood": "Mood"
+  },
+  "mood": {
+    "label": "Mood",
+    "great": "Great",
+    "good": "Good",
+    "okay": "Okay",
+    "bad": "Bad",
+    "awful": "Awful",
+    "noEntry": "No entry",
+    "noData": "Nothing to show yet"
+  },
+  "detail": {
+    "untitled": "Untitled entry",
+    "editDescription": "Edit this journal entry.",
+    "titlePlaceholder": "Give it a title...",
+    "mood": "Mood",
+    "contentPlaceholder": "What's on your mind today?",
+    "confirmDelete": "Delete this entry?",
+    "delete": "Delete",
+    "cancel": "Cancel"
+  },
+  "actions": {
+    "delete": "Delete"
+  },
+  "stats": {
+    "streak": "Journaling streak",
+    "days": "{count} days",
+    "averageMood": "Average mood",
+    "totalEntries": "Total entries"
+  },
+  "newEntry": "New entry",
+  "untitledEntry": "Untitled entry",
+  "noEntries": "No entries yet",
+  "noEntriesHint": "Write your first entry to start your journal.",
+  "noMatches": "No entries match your filters",
+  "noMatchesHint": "Try a different search term or clear the filters.",
+  "searchPlaceholder": "Search entries...",
+  "tags": "Tags",
+  "noTags": "No tags yet",
+  "newTag": "New tag",
+  "clearFilters": "Clear filters",
+  "photos": "Photos",
+  "addPhoto": "Add photo",
+  "voiceNotes": "Voice notes",
+  "recordVoiceNote": "Record voice note",
+  "stopRecording": "Stop",
+  "micUnavailable": "Couldn't access the microphone. Check your browser permissions and try again.",
+  "moodTrend": "Mood trend",
+  "moodDistribution": "Mood distribution"
+}

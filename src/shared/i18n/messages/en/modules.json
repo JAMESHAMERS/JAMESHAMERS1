@@ -1,0 +1,62 @@
+{
+  "overview": {
+    "title": "Overview",
+    "description": "A snapshot of your life will live here once the first modules ship.",
+    "empty": {
+      "title": "Your dashboard is ready for its first module",
+      "description": "This is the application shell — sidebar, theming, and routing are wired up. Feature modules (Tasks, Habits, Finance...) plug in here next."
+    }
+  },
+  "tasks": {
+    "title": "Tasks",
+    "description": "Plan and track what needs to get done.",
+    "empty": {
+      "title": "Tasks module scaffold",
+      "description": "The route, navigation entry, and layout are ready. Task management will be built on top of this in a later phase."
+    }
+  },
+  "habits": {
+    "title": "Habits",
+    "description": "Build and track recurring routines.",
+    "empty": {
+      "title": "Habits module scaffold",
+      "description": "The route, navigation entry, and layout are ready. Habit tracking will be built on top of this in a later phase."
+    }
+  },
+  "meals": {
+    "title": "Meals",
+    "description": "Log meals, track calories, nutrition, and water intake."
+  },
+  "finance": {
+    "title": "Finance",
+    "description": "Track spending, income, and budgets.",
+    "empty": {
+      "title": "Finance module scaffold",
+      "description": "The route, navigation entry, and layout are ready. Budgeting and transactions will be built on top of this in a later phase."
+    }
+  },
+  "journal": {
+    "title": "Journal",
+    "description": "Daily notes, mood, photos, and voice memos in one timeline."
+  },
+  "goals": {
+    "title": "Goals",
+    "description": "Set direction and measure progress.",
+    "empty": {
+      "title": "Goals module scaffold",
+      "description": "The route, navigation entry, and layout are ready. Goal tracking will be built on top of this in a later phase."
+    }
+  },
+  "travel": {
+    "title": "Travel",
+    "description": "Plan trips and track itineraries, expenses, and memories."
+  },
+  "analytics": {
+    "title": "Analytics",
+    "description": "Interactive dashboards across productivity, finance, meals, mood, and travel."
+  },
+  "assistant": {
+    "title": "Assistant",
+    "description": "Ask what to do today, how much you've spent, or how your goals are tracking."
+  }
+}

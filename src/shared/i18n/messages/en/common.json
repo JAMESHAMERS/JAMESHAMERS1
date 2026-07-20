@@ -1,0 +1,23 @@
+{
+  "appName": "LifeOS",
+  "tagline": "Your life, organized in one place.",
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "back": "Back",
+    "confirm": "Confirm",
+    "close": "Close"
+  },
+  "status": {
+    "comingSoon": "Coming soon"
+  },
+  "cta": {
+    "enterApp": "Go to dashboard"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or has moved.",
+    "backHome": "Back to home"
+  }
+}

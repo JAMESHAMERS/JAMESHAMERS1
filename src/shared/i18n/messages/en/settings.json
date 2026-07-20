@@ -1,0 +1,12 @@
+{
+  "title": "Settings",
+  "description": "Manage how LifeOS looks and speaks to you.",
+  "appearance": {
+    "title": "Appearance",
+    "description": "Choose how LifeOS looks on this device."
+  },
+  "language": {
+    "title": "Language",
+    "description": "Choose the language used across LifeOS."
+  }
+}
