@@ -1,0 +1,23 @@
+{
+  "appName": "LifeOS",
+  "tagline": "Toàn bộ cuộc sống của bạn, gọn trong một nơi.",
+  "actions": {
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "continue": "Tiếp tục",
+    "back": "Quay lại",
+    "confirm": "Xác nhận",
+    "close": "Đóng"
+  },
+  "status": {
+    "comingSoon": "Sắp ra mắt"
+  },
+  "cta": {
+    "enterApp": "Vào bảng điều khiển"
+  },
+  "notFound": {
+    "title": "Không tìm thấy trang",
+    "description": "Trang bạn tìm không tồn tại hoặc đã được chuyển đi.",
+    "backHome": "Về trang chủ"
+  }
+}

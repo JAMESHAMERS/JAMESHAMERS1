@@ -1,0 +1,50 @@
+{
+  "overview": {
+    "title": "Tổng quan",
+    "description": "Bức tranh toàn cảnh cuộc sống của bạn sẽ hiển thị ở đây khi các module đầu tiên ra mắt.",
+    "empty": {
+      "title": "Bảng điều khiển đã sẵn sàng cho module đầu tiên",
+      "description": "Khung ứng dụng — thanh bên, giao diện và định tuyến — đã được thiết lập. Các module tính năng (Công việc, Thói quen, Tài chính...) sẽ được gắn vào đây tiếp theo."
+    }
+  },
+  "tasks": {
+    "title": "Công việc",
+    "description": "Lập kế hoạch và theo dõi việc cần làm.",
+    "empty": {
+      "title": "Khung module Công việc",
+      "description": "Tuyến đường, mục điều hướng và bố cục đã sẵn sàng. Tính năng quản lý công việc sẽ được xây dựng ở giai đoạn sau."
+    }
+  },
+  "habits": {
+    "title": "Thói quen",
+    "description": "Xây dựng và theo dõi thói quen lặp lại.",
+    "empty": {
+      "title": "Khung module Thói quen",
+      "description": "Tuyến đường, mục điều hướng và bố cục đã sẵn sàng. Tính năng theo dõi thói quen sẽ được xây dựng ở giai đoạn sau."
+    }
+  },
+  "finance": {
+    "title": "Tài chính",
+    "description": "Theo dõi chi tiêu, thu nhập và ngân sách.",
+    "empty": {
+      "title": "Khung module Tài chính",
+      "description": "Tuyến đường, mục điều hướng và bố cục đã sẵn sàng. Tính năng ngân sách và giao dịch sẽ được xây dựng ở giai đoạn sau."
+    }
+  },
+  "journal": {
+    "title": "Nhật ký",
+    "description": "Suy ngẫm và ghi lại những điều quan trọng.",
+    "empty": {
+      "title": "Khung module Nhật ký",
+      "description": "Tuyến đường, mục điều hướng và bố cục đã sẵn sàng. Tính năng nhật ký sẽ được xây dựng ở giai đoạn sau."
+    }
+  },
+  "goals": {
+    "title": "Mục tiêu",
+    "description": "Đặt định hướng và đo lường tiến độ.",
+    "empty": {
+      "title": "Khung module Mục tiêu",
+      "description": "Tuyến đường, mục điều hướng và bố cục đã sẵn sàng. Tính năng theo dõi mục tiêu sẽ được xây dựng ở giai đoạn sau."
+    }
+  }
+}
