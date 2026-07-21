@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -25,6 +25,16 @@ const fontMono = JetBrains_Mono({
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
+// Tints the mobile browser chrome (Safari/Chrome address bar) to match
+// `--background` per theme, instead of the browser's default white/black —
+// matches "#0a0a0a", the hex nearest `oklch(0.145 0 0)` (dark `--background`).
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
+};
 
 export async function generateMetadata({
   params,

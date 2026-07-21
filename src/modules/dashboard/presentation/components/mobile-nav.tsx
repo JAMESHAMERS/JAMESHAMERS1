@@ -7,6 +7,7 @@ import { MenuIcon } from "lucide-react";
 import { Link } from "@/shared/i18n/navigation";
 import { footerNav, mainNav } from "@/shared/config/nav";
 import { siteConfig } from "@/shared/config/site";
+import { Logo } from "@/shared/components/composed/logo";
 import { Button } from "@/shared/components/ui/button";
 import { Separator } from "@/shared/components/ui/separator";
 import {
@@ -35,11 +36,9 @@ export function MobileNav() {
             <Link
               href="/dashboard"
               onClick={() => setOpen(false)}
-              className="flex items-center gap-2 font-semibold"
+              className="flex items-center gap-2 font-semibold tracking-tight"
             >
-              <span className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md text-sm">
-                L
-              </span>
+              <Logo className="size-7" />
               <span>{siteConfig.name}</span>
             </Link>
           </SheetTitle>

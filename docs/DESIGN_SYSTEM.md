@@ -11,6 +11,33 @@
   `components.json` records the conventions (aliases, style, base color) so
   the `shadcn` CLI can still add new components consistently later.
 
+## Brand
+
+- **Mark** — `src/shared/components/composed/logo.tsx` (`<Logo />`): a
+  gradient squircle with a core-and-orbit glyph (a center dot inside a
+  ring, with one dot riding the ring). Reads as "everything tracked
+  around one center point" without leaning on a literal task-list/
+  calendar icon that would bias toward one module over the others.
+  Replaces the plain "L"-in-a-box placeholder used through the Analytics
+  phase. Used in `Sidebar`/`MobileNav`; the Topbar's user avatar and
+  primary buttons pick up the same hue automatically via `--primary`.
+- **App icons** — `src/app/icon.svg` (browser tab, reuses the exact mark)
+  and `src/app/apple-icon.tsx` (iOS home screen, code-generated via
+  `next/og`'s `ImageResponse`/Satori). The two aren't pixel-identical:
+  Satori doesn't reliably parse `oklch()` colors or the `inset` CSS
+  shorthand, so `apple-icon.tsx` redraws the same shapes with explicit
+  `top`/`left`/`width`/`height`, longhand `border*` properties, and hex
+  approximations of the brand hue — see the comment in that file before
+  copying its pattern elsewhere.
+- **`--brand`** (`globals.css`) — one indigo/violet hue (OKLCH hue 275),
+  the single source every brand-colored token below derives from.
+- Adding `apple-icon`/`icon` as code-generated (extension-less) routes
+  under `app/` requires listing them in `src/proxy.ts`'s middleware
+  matcher exclusion — next-intl's default matcher only skips paths with
+  a dot (`favicon.ico`, `icon.svg`), not extension-less generated routes,
+  so without the exclusion they get redirected under a locale prefix and
+  404. `apple-icon` is already excluded; add any future one the same way.
+
 ## Color tokens
 
 All colors are OKLCH, defined once per mode in `globals.css`:
@@ -20,19 +47,21 @@ All colors are OKLCH, defined once per mode in `globals.css`:
 | `background` / `foreground` | Page base |
 | `card` / `card-foreground` | Surfaces raised above the page |
 | `popover` / `popover-foreground` | Floating layers (dropdowns, dialogs) |
-| `primary` / `primary-foreground` | Primary actions |
+| `primary` / `primary-foreground` | Primary actions — the brand hue (`--brand`), not a neutral, since Analytics/Assistant |
 | `secondary` / `secondary-foreground` | Secondary actions |
 | `muted` / `muted-foreground` | De-emphasized text/surfaces |
 | `accent` / `accent-foreground` | Hover/active states |
 | `destructive` / `destructive-foreground` | Dangerous actions |
 | `success` / `warning` (+ `-foreground`) | Status colors — added beyond the shadcn default set since a life-management app needs "done"/"at risk" states from day one |
-| `border` / `input` / `ring` | Structural lines and focus rings |
-| `sidebar*` | Sidebar has its own token set so it can read as a distinct surface from the main canvas in both themes |
+| `border` / `input` / `ring` | Structural lines and focus rings — `ring` is brand-tinted (low chroma) rather than plain gray |
+| `sidebar*` | Sidebar has its own token set so it can read as a distinct surface from the main canvas in both themes; `sidebar-primary`/`sidebar-accent-foreground` pick up the brand hue for the active nav item |
 | `chart-1..5` | Multi-series data visualization (e.g. a legend of categories). Deliberately different hues per mode, like the rest of the shadcn chart palette — good for series variety, not for a single metric that needs to look the same in both themes. |
-| `chart-accent` | Single consistent hue (only lightness/chroma tuned) across light/dark, for one-metric visuals like a score gauge where the color is part of the metric's identity and shouldn't flip hue when the user switches theme. |
+| `chart-accent` | Same value as `--primary`/`--brand` — this token predates the rebrand (it's what `--brand` was extracted from) and is kept as a distinct name for chart call sites that want "the brand color" without implying "primary action". |
 
 Never hardcode a hex/oklch value in a component — reference the semantic
 Tailwind class (`bg-primary`, `text-muted-foreground`, `border-border`).
+The one deliberate exception is `logo.tsx`/`icon.svg`/`apple-icon.tsx`
+(see "Brand" above), which can't reach the CSS variable cascade.
 
 ## Typography
 

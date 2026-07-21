@@ -12,7 +12,7 @@ export function Topbar() {
         <LocaleSwitcher />
         <ThemeToggle />
         <Avatar className="ml-1 size-8">
-          <AvatarFallback>LO</AvatarFallback>
+          <AvatarFallback className="bg-primary text-primary-foreground">LO</AvatarFallback>
         </Avatar>
       </div>
     </header>
