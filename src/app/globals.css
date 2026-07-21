@@ -19,13 +19,6 @@
 :root {
   --radius: 0.625rem;
 
-  /* Brand hue — one indigo/violet (275) used for --primary, --ring, and
-     the sidebar's active/focus tokens below, kept at the same hue in both
-     modes (only lightness/chroma tuned), same philosophy as --chart-accent
-     which originated this hue as LifeOS's single-metric brand color before
-     it became the whole app's primary. See docs/DESIGN_SYSTEM.md#brand. */
-  --brand: oklch(0.55 0.22 275);
-
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
 
@@ -35,7 +28,7 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
 
-  --primary: var(--brand);
+  --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
 
   --secondary: oklch(0.97 0 0);
@@ -58,7 +51,7 @@
 
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0.06 275);
+  --ring: oklch(0.708 0 0);
 
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -68,19 +61,17 @@
   /* Same hue in both modes (only lightness/chroma tuned for contrast) —
      unlike chart-1..5 above, which intentionally vary per mode for series
      variety, this is for single-metric visuals (e.g. a score gauge) that
-     need one consistent brand color across light/dark. Now literally the
-     same value as --brand above — this token predates --primary's rebrand
-     and is kept as a semantically distinct name for chart call sites. */
-  --chart-accent: var(--brand);
+     need one consistent brand color across light/dark. */
+  --chart-accent: oklch(0.56 0.19 275);
 
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: var(--brand);
+  --sidebar-primary: oklch(0.205 0 0);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.95 0.025 275);
-  --sidebar-accent-foreground: var(--brand);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0.06 275);
+  --sidebar-ring: oklch(0.708 0 0);
 }
 
 .dark {
@@ -93,8 +84,8 @@
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
 
-  --primary: var(--brand);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
 
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -116,23 +107,23 @@
 
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.6 0.1 275);
+  --ring: oklch(0.556 0 0);
 
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --chart-accent: var(--brand);
+  --chart-accent: oklch(0.68 0.19 275);
 
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: var(--brand);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.28 0.035 275);
-  --sidebar-accent-foreground: oklch(0.78 0.15 275);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.6 0.1 275);
+  --sidebar-ring: oklch(0.556 0 0);
 }
 
 @theme inline {

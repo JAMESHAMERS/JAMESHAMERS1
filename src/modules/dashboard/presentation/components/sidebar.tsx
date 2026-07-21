@@ -3,7 +3,6 @@
 import { Link } from "@/shared/i18n/navigation";
 import { footerNav, mainNav } from "@/shared/config/nav";
 import { siteConfig } from "@/shared/config/site";
-import { Logo } from "@/shared/components/composed/logo";
 import { Separator } from "@/shared/components/ui/separator";
 import { NavLink } from "./nav-link";
 
@@ -15,8 +14,10 @@ export function Sidebar() {
   return (
     <aside className="bg-sidebar text-sidebar-foreground border-sidebar-border hidden w-64 shrink-0 flex-col border-r lg:flex">
       <div className="flex h-14 items-center gap-2 px-4">
-        <Link href="/dashboard" className="flex items-center gap-2 font-semibold tracking-tight">
-          <Logo className="size-7" />
+        <Link href="/dashboard" className="flex items-center gap-2 font-semibold">
+          <span className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md text-sm">
+            L
+          </span>
           <span>{siteConfig.name}</span>
         </Link>
       </div>
